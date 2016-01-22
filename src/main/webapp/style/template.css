@@ -5,11 +5,17 @@
   src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
 }
 
-@font-face {
+/*@font-face {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 300;
   src: local('Oswald Light'), local('Oswald-Light'), url(https://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+}*/
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'), url(https://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');
 }
 
 @font-face {
@@ -22,6 +28,14 @@
 html, body {
 	margin: 0px;
 	min-width: 630px;
+}
+
+hr {
+    border: none;
+    background-color: #ccc;
+    color: #ccc;
+    height: 1px;
+    width: 98%;
 }
 
 span.pe {
@@ -46,7 +60,7 @@ span.pe:hover, span.peselected {
 }
 
 div.portal {
-	width: 26%;
+	width: 22%;
 	margin: 0px;
 	padding: 0px;
 	float: left;
@@ -100,7 +114,7 @@ a.pe, a.pe:hover, a.pe:active, a.pe:visited {
 }
 
 div.content {
-	width: 74%;
+	width: 78%;
 	height: 300px;
 	padding: 0px;
 	margin: 0px;
@@ -111,7 +125,6 @@ div.household {
 	margin-right: 32px;
 	margin-left: 32px;
 	margin-top: 32px;
-	margin-bottom: 32px;
 	display: inline-block;
 	width: auto;
 }
@@ -130,20 +143,72 @@ span.residents {
 }
 
 h5.residents {
-	font-family: "Oswald", sans-serif;
+	font-family: "Lato", sans-serif;
 	text-transform: uppercase;
 	margin: 0px;
 }
 
-a.residents {
+a.residents, a.household {
 	text-decoration: none;
 	color: #2222FF;
 }
 
-a.residents:hover {
+a.residents:hover, a.household:hover {
 	transition: color 0.3s ease 0s;
 	text-decoration: underline;
 	color: #5266BD;
 }
+
+span.address {
+	display: inline-block;
+	font-family: "Lato", sans-serif;
+	font-size: 16px;
+	margin-bottom: 6px;
+}
+
+h1.page-title {
+	font-family: "Lato", sans-serif;
+	margin-left: 32px;
+	margin-right: 32px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding: 0px;
+}
+
+div.profile-header {
+	margin: 32px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	height: 150px;
+}
+
+img.profile-header {
+	display: inline-block;
+	float: left;
+}
+
+h2.profile-header {
+	font-family: "Lato", sans-serif;
+	margin-left: 8px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 0px;
+	display: inline-block;
+	clear: left;
+}
+
+h4.profile-header {
+	font-family: "Lato", sans-serif;
+	margin-left: 8px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 0px;
+	color: #888888;
+	display: inline-block;
+	clear: left;
+}
+
+
+
 
 
