@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+}
+
+html, body {
+	margin: 0px;
+}
+
+span.pe {
+	color: white;
+	font-family: "Open Sans", sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	text-decoration: none;
+	background-color: rgb(40, 59, 139);
+	padding-left: 16px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	display: block;
+}
+
+span.pe:hover {
+	transition: background 0.3s ease 0s, border 0.3s ease 0s, color 0.3s ease 0s;
+	color: #000000;
+	background-color: rgb(234, 232, 237);
+}
+
+ul.portal {
+	width: 26%;
+	list-style: none outside none;
+	margin: 0px;
+	padding: 0px;
+	background-color: rgb(234, 232, 237);
+}
+
+li.pe {
+	width: 100%;
+	padding: 0px;
+	margin: 1px;
+	color: white;
+}
+
+li.ph {
+	width: 100%;
+	padding: 0px;
+	margin: 1px;
+	color: white;
+}
+
+span.ph {
+	color: black;
+	font-family: "Open Sans", sans-serif;
+	font-size: 14px;
+	/*font-weight: 600;*/
+	/*text-transform: uppercase;*/
+	text-decoration: none;
+	background-color: rgb(234, 232, 237);
+	padding-left: 16px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	display: block;
+}
+
+a.ph {
+	text-decoration: underline;
+	color: #6666FF;
+}
+
+a.pe, a.pe:hover, a.pe:active, a.pe:visited {
+	text-decoration: none;
+	display: block;
+	width: 100%;
+}
+
