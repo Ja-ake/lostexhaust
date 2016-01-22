@@ -16,7 +16,6 @@
 package org.yaml.snakeyaml.serializer;
 
 import java.text.NumberFormat;
-
 import org.yaml.snakeyaml.nodes.Node;
 
 public class NumberAnchorGenerator implements AnchorGenerator {

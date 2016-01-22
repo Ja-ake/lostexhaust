@@ -17,7 +17,6 @@ package org.yaml.snakeyaml;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.yaml.snakeyaml.nodes.Tag;
 
 /**

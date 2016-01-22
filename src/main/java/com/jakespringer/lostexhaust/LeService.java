@@ -28,9 +28,7 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-
 import org.yaml.snakeyaml.Yaml;
-
 import com.jakespringer.lostexhaust.error.InvalidConfigurationException;
 import com.jakespringer.lostexhaust.user.Account;
 import com.jakespringer.lostexhaust.user.AccountDbService;

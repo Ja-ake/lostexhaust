@@ -8,13 +8,10 @@
 
 package com.jakespringer.lostexhaust;
 import static spark.Spark.get;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import spark.ModelAndView;
-
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
+import spark.ModelAndView;
 
 public class LeWebserver {
 	public static final String APP_DIR = "/src/main/webapp/";

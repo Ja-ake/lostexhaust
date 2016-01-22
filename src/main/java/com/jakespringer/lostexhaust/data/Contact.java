@@ -24,7 +24,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import com.jakespringer.lostexhaust.error.InvalidCountryCodeException;
 import com.jakespringer.lostexhaust.error.InvalidEmailException;
 import com.jakespringer.lostexhaust.error.InvalidNumberException;

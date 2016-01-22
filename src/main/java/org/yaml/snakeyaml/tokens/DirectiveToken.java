@@ -16,7 +16,6 @@
 package org.yaml.snakeyaml.tokens;
 
 import java.util.List;
-
 import org.yaml.snakeyaml.error.Mark;
 import org.yaml.snakeyaml.error.YAMLException;
 

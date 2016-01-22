@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.util.UriEncoder;
 

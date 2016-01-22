@@ -5,8 +5,23 @@
   src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
 }
 
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Oswald Light'), local('Oswald-Light'), url(https://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v11/EsvMC5un3kjyUhB9ZEPPwg.woff2) format('woff2');
+}
+
 html, body {
 	margin: 0px;
+	min-width: 630px;
 }
 
 span.pe {
@@ -18,19 +33,27 @@ span.pe {
 	text-decoration: none;
 	background-color: rgb(40, 59, 139);
 	padding-left: 16px;
+	padding-right: 16px;
 	padding-top: 8px;
 	padding-bottom: 8px;
 	display: block;
 }
 
-span.pe:hover {
+span.pe:hover, span.peselected {
 	transition: background 0.3s ease 0s, border 0.3s ease 0s, color 0.3s ease 0s;
 	color: #000000;
 	background-color: rgb(234, 232, 237);
 }
 
-ul.portal {
+div.portal {
 	width: 26%;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+ul.portal {
+	width: 100%;
 	list-style: none outside none;
 	margin: 0px;
 	padding: 0px;
@@ -75,4 +98,52 @@ a.pe, a.pe:hover, a.pe:active, a.pe:visited {
 	display: block;
 	width: 100%;
 }
+
+div.content {
+	width: 74%;
+	height: 300px;
+	padding: 0px;
+	margin: 0px;
+	float: right;
+}
+
+div.household {
+	margin-right: 32px;
+	margin-left: 32px;
+	margin-top: 32px;
+	margin-bottom: 32px;
+	display: inline-block;
+	width: auto;
+}
+
+span.resident-pictures {
+	float: left;
+	margin-right: 16px;
+}
+
+span.residents {
+	float: left;
+	font-family: "Lato", sans-serif;
+	max-height: 20px;
+	width: auto;
+	text-overflow: hidden;
+}
+
+h5.residents {
+	font-family: "Oswald", sans-serif;
+	text-transform: uppercase;
+	margin: 0px;
+}
+
+a.residents {
+	text-decoration: none;
+	color: #2222FF;
+}
+
+a.residents:hover {
+	transition: color 0.3s ease 0s;
+	text-decoration: underline;
+	color: #5266BD;
+}
+
 

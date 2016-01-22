@@ -17,7 +17,6 @@ package org.yaml.snakeyaml;
 
 import java.util.Map;
 import java.util.TimeZone;
-
 import org.yaml.snakeyaml.emitter.Emitter;
 import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.serializer.AnchorGenerator;

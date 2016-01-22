@@ -16,7 +16,6 @@
 package org.yaml.snakeyaml.parser;
 
 import java.util.Map;
-
 import org.yaml.snakeyaml.DumperOptions.Version;
 
 /**

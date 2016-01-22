@@ -16,7 +16,6 @@
 package org.yaml.snakeyaml.external.com.google.gdata.util.common.base;
 
 import java.io.IOException;
-
 import com.google.common.escape.CharEscaper;
 import com.google.common.escape.CharEscaperBuilder;
 

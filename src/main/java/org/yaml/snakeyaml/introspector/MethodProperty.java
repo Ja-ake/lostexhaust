@@ -16,7 +16,6 @@
 package org.yaml.snakeyaml.introspector;
 
 import java.beans.PropertyDescriptor;
-
 import org.yaml.snakeyaml.error.YAMLException;
 
 /**

@@ -20,7 +20,6 @@
 package com.jakespringer.lostexhaust;
 
 import java.util.Map;
-
 import com.jakespringer.lostexhaust.error.InvalidConfigurationException;
 
 public class AsphaltConfiguration {

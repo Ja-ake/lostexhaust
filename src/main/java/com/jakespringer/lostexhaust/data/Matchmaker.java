@@ -22,7 +22,6 @@ package com.jakespringer.lostexhaust.data;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.stream.Stream;
-
 import com.jakespringer.lostexhaust.user.Account;
 import com.jakespringer.lostexhaust.user.LeAccountService;
 

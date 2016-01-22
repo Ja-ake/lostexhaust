@@ -16,7 +16,6 @@
 package org.yaml.snakeyaml.resolver;
 
 import java.util.regex.Pattern;
-
 import org.yaml.snakeyaml.nodes.Tag;
 
 final class ResolverTuple {

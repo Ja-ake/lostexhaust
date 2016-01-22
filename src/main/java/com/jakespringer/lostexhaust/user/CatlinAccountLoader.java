@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import com.jakespringer.lostexhaust.error.InvalidAccountElementException;
 import com.jakespringer.lostexhaust.error.InvalidEmailException;
 import com.jakespringer.lostexhaust.error.InvalidNumberException;

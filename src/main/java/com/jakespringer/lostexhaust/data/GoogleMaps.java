@@ -22,17 +22,14 @@ package com.jakespringer.lostexhaust.data;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import com.jakespringer.lostexhaust.LeService;
 import com.jakespringer.lostexhaust.error.InvalidAddressElementException;
 import com.jakespringer.lostexhaust.error.InvalidPlaceException;
