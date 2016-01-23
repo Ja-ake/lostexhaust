@@ -58,7 +58,8 @@ span.pe {
 span.pe:hover, span.peselected {
 	transition: background 0.3s ease 0s, border 0.3s ease 0s, color 0.3s ease 0s;
 	color: #000000;
-	background-color: rgb(234, 232, 237);
+	/*background-color: rgb(234, 232, 237);*/
+	background-color: #3F5BD2;
 }
 
 div.portal {
