@@ -20,7 +20,7 @@ public class JakeTestUserContext implements UserContext {
 
     @Override
     public List<HouseholdContext> getHouseholds() {
-        return Lists.newArrayList(new JakeTestHouseholdContext());
+        return Lists.newArrayList(Tests.jhc);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class JakeTestUserContext implements UserContext {
 
     @Override
     public List<Relationship> getRelationships() {
-        return Lists.newArrayList(new Relationship(new NicholasTestUserContext(), "Sibling"));
+        return Lists.newArrayList(new Relationship(Tests.nuc, "Sibling"));
     }
 
 }

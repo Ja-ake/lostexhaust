@@ -1,8 +1,10 @@
 @font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Open Sans'), local('OpenSans'),
+		url(https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2)
+		format('woff2');
 }
 
 /*@font-face {
@@ -12,17 +14,21 @@
   src: local('Oswald Light'), local('Oswald-Light'), url(https://fonts.gstatic.com/s/oswald/v10/HqHm7BVC_nzzTui2lzQTDVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
 }*/
 @font-face {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Oswald Regular'), local('Oswald-Regular'), url(https://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');
+	font-family: 'Oswald';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Oswald Regular'), local('Oswald-Regular'),
+		url(https://fonts.gstatic.com/s/oswald/v10/pEobIV_lL25TKBpqVI_a2w.woff2)
+		format('woff2');
 }
 
 @font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v11/EsvMC5un3kjyUhB9ZEPPwg.woff2) format('woff2');
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Lato Light'), local('Lato-Light'),
+		url(https://fonts.gstatic.com/s/lato/v11/EsvMC5un3kjyUhB9ZEPPwg.woff2)
+		format('woff2');
 }
 
 html, body {
@@ -31,13 +37,13 @@ html, body {
 }
 
 hr {
-    border: none;
-    background-color: #ccc;
-    color: #ccc;
-    height: 1px;
-    width: 100%;
-    margin-top: 4px;
-    margin-bottom: 4px;
+	border: none;
+	background-color: #ccc;
+	color: #ccc;
+	height: 1px;
+	width: 100%;
+	margin-top: 4px;
+	margin-bottom: 4px;
 }
 
 span.pe {
@@ -56,10 +62,11 @@ span.pe {
 }
 
 span.pe:hover, span.peselected {
-	transition: background 0.3s ease 0s, border 0.3s ease 0s, color 0.3s ease 0s;
+	transition: background 0.3s ease 0s, border 0.3s ease 0s, color 0.3s
+		ease 0s;
 	color: #000000;
-	/*background-color: rgb(234, 232, 237);*/
-	background-color: #3F5BD2;
+	background-color: rgb(234, 232, 237);
+	/*background-color: #3F5BD2;*/
 }
 
 div.portal {
@@ -109,7 +116,6 @@ span.ph {
 	text-decoration: underline;
 	color: #6666FF;
 }*/
-
 a.pe, a.pe:hover, a.pe:active, a.pe:visited {
 	text-decoration: none;
 	display: block;
@@ -127,9 +133,15 @@ div.content {
 div.household {
 	margin-right: 32px;
 	margin-left: 32px;
-	margin-top: 32px;
+	margin-top: 8px;
 	display: inline-block;
 	width: auto;
+}
+
+span.household-select {
+	font-family: "Open Sans", sans-serif;
+	margin-left: 32px;
+	margin-right: 32px;
 }
 
 span.resident-pictures {
@@ -259,7 +271,3 @@ hr.household {
 	width: 100%;
 	max-width: 600px;
 }
-
-
-
-

@@ -20,7 +20,7 @@ public class NicholasTestUserContext implements UserContext {
 
     @Override
     public List<HouseholdContext> getHouseholds() {
-        return Lists.newArrayList(new JakeTestHouseholdContext());
+        return Lists.newArrayList(Tests.nhc);
     }
 
     @Override

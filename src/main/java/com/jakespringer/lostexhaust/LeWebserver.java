@@ -37,6 +37,8 @@ public class LeWebserver {
 	    
         get("/near.html", (req, res) -> {
         	Map<String, Object> context = new HashMap<>();
+        	UserSession userSession = sessionService.getSession(req.cookie("session"));
+        	UserContext user = userSession.getContext();
         	return new ModelAndView(context, REQ_APP_DIR + "near.peb");
         }, pebbleEngine);
         

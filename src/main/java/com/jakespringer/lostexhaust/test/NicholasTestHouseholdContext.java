@@ -2,9 +2,9 @@ package com.jakespringer.lostexhaust.test;
 
 import java.util.List;
 import com.google.common.collect.Lists;
-import com.jakespringer.lostexhaust.Coordinates;
 import com.jakespringer.lostexhaust.user.HouseholdContext;
 import com.jakespringer.lostexhaust.user.UserContext;
+import com.jakespringer.lostexhaust.util.Coordinates;
 
 public class NicholasTestHouseholdContext implements HouseholdContext {
     @Override
@@ -24,7 +24,6 @@ public class NicholasTestHouseholdContext implements HouseholdContext {
 
     @Override
     public List<UserContext> getResidents() {
-        return Lists.newArrayList(new JakeTestUserContext(), 
-                new NicholasTestUserContext());
+        return Lists.newArrayList(Tests.juc, Tests.nuc);
     }
 }
