@@ -1,0 +1,35 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style/template.css"></link>
+</head>
+<body>
+  <div class="portal"><ul class="portal">
+    <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
+    <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
+    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Your household</span></a></li>
+    <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
+  </ul></div>
+  <div class="content">
+    <h1 class="page-title">Your Household</h1>
+    <div class="household-info">
+      <div class="profile-section">
+        <br><b>{{ address }}</b><hr align="left" class="household">
+        <iframe
+          class="google-map-household"
+          height="350"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD_DoQ4FFyAG-98-96ygUuPRIoU2bzu9c4&q=place_id:{{ place_id }}" allowfullscreen>
+          Your browser does not support iframes.
+        </iframe>
+      </div>
+      <div class="profile-section">
+        <b>Inhabitants</b><hr align="left" class="household">
+        {% for inhabitant in inhabitants %}
+          <span class="profile-info-field"><i>{{ inhabitant.affiliation }}</i></span>
+          <span class="profile-info-entry"><a class="residents" href="person.html?p={{ inhabitant.id }}">{{ inhabitant.firstname }} {{ inhabitant.lastname }}</a></span><hr align="left" class="household">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -20,49 +20,15 @@
 package com.jakespringer.lostexhaust;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import org.yaml.snakeyaml.Yaml;
-import com.jakespringer.lostexhaust.error.InvalidConfigurationException;
-import com.jakespringer.lostexhaust.user.Account;
-import com.jakespringer.lostexhaust.user.AccountDbService;
-import com.jakespringer.lostexhaust.user.LeAccountService;
 
 public class LeService {
-    private static AsphaltConfiguration configuration;
-    
-    public static void initialize() {
-        Reader reader = null;
-        try {
-            reader = new FileReader(new File("conf", "asphalt.yaml"));
-            Yaml yaml = new Yaml();
-            configuration = new AsphaltConfiguration((Map<?, ?>) yaml.load(reader));
-            reader.close();
-        } catch (IOException | InvalidConfigurationException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                }
-            }
-        }
-        
-        List<Account> accList = AccountDbService.getInstance().getAllAccounts();
-        for (Account a : accList) {
-            LeAccountService.register(a);
-        }
-    }
-    
-    public static AsphaltConfiguration getConfiguration() {
-        return configuration;
+    public static long getValidityDuration() {
+        // 12 hours
+        // TODO add to configuration
+        return 43200L;
     }
     
     public static String fetchUrl(String urlName) throws IOException {
@@ -77,5 +43,19 @@ public class LeService {
         reader.close();
         
         return b.toString();
+    }
+    
+    public static String getFileSuffix(String path) {
+        int i = path.lastIndexOf('.');
+        int p = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
+
+        if (i > p) return path.substring(i+1);
+        else return "";
+    }
+    
+    public static boolean suffixMatches(String path, String... toMatch) {
+        String suffix = getFileSuffix(path);
+        for (String m : toMatch) if (suffix.equalsIgnoreCase(m)) return true;
+        return false;
     }
 }

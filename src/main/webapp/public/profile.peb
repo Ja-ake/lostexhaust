@@ -1,0 +1,51 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style/template.css"></link>
+</head>
+<body>
+  <div class="portal"><ul class="portal">
+    <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
+    <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
+    <li class="pe"><a class="pe" href="household.html"><span class="pe">Your household</span></a></li>
+    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Your profile</span></a></li>
+  </ul></div>
+  <div class="content">
+    <h1 class="page-title">Your Profile</h1>
+    <div class="profile-header">
+      <img width="100px" class="profile-header" src="img/{{ user.id }}-large.jpg">
+      <h2 class="profile-header">{{ user.firstname }} {{ user.lastname }}</h2><br>
+      <h4 class="profile-header">{{ user.affiliation }}</h4>
+    </div>
+    <div class="profile-info">
+      <div class="profile-section">
+        <b>Student Information</b><hr align="left" class="profile">
+        <span class="profile-info-field"><i>Current Grade</i></span>
+        <span class="profile-info-entry">{{ user.gradeLevel }}</span><hr align="left" class="profile">
+        <span class="profile-info-field"><i>Class Of</i></span>
+        <span class="profile-info-entry">{{ user.classYear }}</span><hr align="left" class="profile">
+      </div>
+      <div class="profile-section">
+        <b>Contact</b><hr align="left" class="profile">
+        {% for contact in user.contactInfo %}
+          <span class="profile-info-field"><i>{{ contact.type }}</i></span>
+          <span class="profile-info-entry"><a class="contact" href="javascript:;">{{ contact.value }}</a></span><hr align="left" class="profile">
+        {% endfor %}
+      </div>
+      <div class="profile-section">
+        <b>Households</b><hr align="left" class="profile">
+        {% for household in user.households %}
+          <span class="profile-info-field"><i>Address</i></span>
+          <span class="profile-info-entry"><a class="household" href="household.html">{{ household.address }}</a></span><hr align="left" class="profile">
+        {% endfor %}
+      </div>
+      <div class="profile-section">
+        <b>Relationships</b><hr align="left" class="profile">
+        {% for relationship in user.relationships %}
+          <span class="profile-info-field"><i>{{ relationship.type }}</i></span>
+          <span class="profile-info-entry"><a class="residents" href="person.html?p={{ relationship.user.id }}">{{ relationship.user.firstname }} {{ relationship.user.lastname }}</a></span><hr align="left" class="profile">
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
