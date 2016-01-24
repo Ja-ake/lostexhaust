@@ -20,7 +20,7 @@ public class Timestamp {
      * (this.delta(newer) > epsilon)
      */
     public boolean validate(Timestamp newer, long epsilon) {
-        return delta(newer) > epsilon;
+        return delta(newer) < epsilon;
     }
     
     /**

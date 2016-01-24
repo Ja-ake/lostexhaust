@@ -14,7 +14,7 @@ public class JakeTestHouseholdContext implements HouseholdContext {
 
     @Override
     public Coordinates getCoordinates() {
-        return new Coordinates(0, 0);
+        return new Coordinates(45.4979297,-122.751327);
     }
 
     @Override

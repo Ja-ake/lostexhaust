@@ -65,8 +65,8 @@ span.pe:hover, span.peselected {
 	transition: background 0.3s ease 0s, border 0.3s ease 0s, color 0.3s
 		ease 0s;
 	color: #000000;
-	background-color: rgb(234, 232, 237);
-	/*background-color: #3F5BD2;*/
+	/*background-color: rgb(234, 232, 237);*/
+	background-color: #D0D0D0;
 }
 
 div.portal {
@@ -124,15 +124,14 @@ a.pe, a.pe:hover, a.pe:active, a.pe:visited {
 
 div.content {
 	width: 78%;
+	max-width: 600px;
 	height: 300px;
 	padding: 0px;
 	margin: 0px;
-	float: right;
+	float: left;
 }
 
 div.household {
-	margin-right: 32px;
-	margin-left: 32px;
 	margin-top: 8px;
 	display: inline-block;
 	width: auto;
@@ -140,8 +139,6 @@ div.household {
 
 span.household-select {
 	font-family: "Open Sans", sans-serif;
-	margin-left: 32px;
-	margin-right: 32px;
 }
 
 span.resident-pictures {
@@ -172,6 +169,11 @@ a.residents:hover, a.household:hover, a.contact:hover, a.ph:hover {
 	transition: color 0.3s ease 0s;
 	text-decoration: underline;
 	color: #5266BD;
+}
+
+div.near-content {
+	margin-left: 32px;
+	margin-right: 32px;
 }
 
 span.address {
@@ -270,4 +272,10 @@ hr.profile {
 hr.household {
 	width: 100%;
 	max-width: 600px;
+}
+
+hr.near {
+	width: 100%;
+	max-width: 600px;
+	margin-top: 18px;
 }

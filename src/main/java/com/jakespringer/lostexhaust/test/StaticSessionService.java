@@ -4,11 +4,14 @@ import com.jakespringer.lostexhaust.user.SessionService;
 import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Timestamp;
 
-public class JakeTestSessionService implements SessionService {
-    private UserSession testSession = new UserSession(Tests.juc, "127.0.0.1", Timestamp.currentTime());
+public class StaticSessionService implements SessionService {
 
     @Override
     public UserSession getSession(String cookie) {
-        return testSession;
+        switch (cookie) {
+        case "brady": return new UserSession(Tests.ubrady, "127.0.0.1", Timestamp.currentTime());
+        
+        default: return null;
+        }
     }
 }

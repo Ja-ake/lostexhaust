@@ -4,32 +4,43 @@
 </head>
 <body>
   <div class="portal"><ul class="portal">
-    <li class="ph"><span class="ph">Welcome, %USER%.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
+    <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Households near you</span></a></li>
     <li class="pe"><a class="pe" href="household.html"><span class="pe">Your household</span></a></li>
     <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
   </ul></div>
   <div class="content">
     <h1 class="page-title">Households Near You</h1>
-    <span class="household-select">Current household:  
-    <select>
-	  <option value="0">3065 SW 70th Ave, Portland, OR</option>
-	  <option value="1">3012 NW Waterburn St, Beaverton, OR</option>
-	</select></span><br>
+    <div class="near-content"><span class="household-select">Current household:  
+    <select onchange="javascript:window.location.href='/near.html?h='+this.selectedIndex;">
+      {% for household in user.households %}
+	    {% if loop.index == h %}
+	      <option selected="selected" value="{{ loop.index }}">{{ household.address }}</option>
+	    {% else %}
+	      <option value="{{ loop.index }}">{{ household.address }}</option>
+	    {% endif %}
+	  {% endfor %}
+	</select></span><hr class="near">
+	{% for carpool in sorted %}
   	<div class="household">
-  	  <span class="address"><a class="household" href="javascript:;">3065 SW 70th Ave, Portland, OR</a> (<b>0.23 mi</b>)</span><br>
+  	  <span class="address"><a class="household" href="javascript:;">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
   	  <span class="resident-pictures">
-  	  	<img src="img/ST16421.jpg">
-  	  	<img src="img/ST19029.jpg">
+  	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
+  	  	  <img width="80" height="100" src="img/{{ resident.id }}.jpg">
+  	  	{% endfor %}
   	  </span>
   	  <span class="residents">
   	  	<h5 class="residents">Residents</h5>
-  	  	<a class="residents" href="javascript:;">Jake Springer</a><br>
-  	  	<a class="residents" href="javascript:;">Nicholas Springer</a><br>
-  	  	<a class="residents" href="javascript:;">Melanie Mitchell</a><br>
-  	  	and more...
+  	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
+  	  	  {% if (loop.index < 3) or (carpool.household.residents.size == 4) %}
+  	  	    <a class="residents" href="person.html?p={{ resident.id }}">{{ resident.firstname }} {{ resident.lastname }}</a><br>
+  	  	  {% else %}
+  	  	    and more...
+  	  	  {% endif %}
+  	  	{% endfor %}
   	  </span>
-  	</div><br>
+  	</div><br><hr class="near">
+  	{% endfor %}
+  	</div>
   </div>
 </body>
-</html>

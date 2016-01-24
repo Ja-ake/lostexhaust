@@ -20,7 +20,8 @@ public class JakeTestUserContext implements UserContext {
 
     @Override
     public List<HouseholdContext> getHouseholds() {
-        return Lists.newArrayList(Tests.jhc);
+        return Lists.newArrayList(Tests.jhc, Tests.hstyles, Tests.hdiggs, Tests.hbrady,
+                Tests.hvergara);
     }
 
     @Override

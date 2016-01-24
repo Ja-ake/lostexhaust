@@ -9,7 +9,7 @@ import com.jakespringer.lostexhaust.util.Coordinates;
 public class NicholasTestHouseholdContext implements HouseholdContext {
     @Override
     public String getPlaceId() {
-        return "ChIJXXo8PucLlVQRbhTDDUyanfM";
+        return "EjA3NTIwIFNXIENhbnlvbiBDcmVzdCBEciwgUG9ydGxhbmQsIE9SIDk3MjI1LCBVU0E";
     }
 
     @Override
@@ -19,7 +19,7 @@ public class NicholasTestHouseholdContext implements HouseholdContext {
 
     @Override
     public String getAddress() {
-        return "3065 SW 70th Ave, Portland, OR";
+        return "7520 SW Canyon Crest Dr, Portland, OR";
     }
 
     @Override

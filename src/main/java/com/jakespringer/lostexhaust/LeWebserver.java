@@ -13,9 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import com.jakespringer.lostexhaust.near.Carpool;
+import com.jakespringer.lostexhaust.near.CarpoolSorter;
 import com.jakespringer.lostexhaust.test.JakeTestSessionService;
+import com.jakespringer.lostexhaust.user.ContextCache;
 import com.jakespringer.lostexhaust.user.HouseholdContext;
+import com.jakespringer.lostexhaust.user.HouseholdContextFactory;
 import com.jakespringer.lostexhaust.user.SessionService;
 import com.jakespringer.lostexhaust.user.UserContext;
 import com.jakespringer.lostexhaust.user.UserContextFactory;
@@ -32,13 +37,23 @@ public class LeWebserver {
 	    SessionService sessionService = new JakeTestSessionService();
 	    
 	    get("/", (req, res) -> {
-	        return "Welcome to <a href=\"https://www.lostexhaust.org/\">Lost Exhaust!</a>";
+	        return Files.readAllBytes(Paths.get(REQ_APP_DIR + "embed.html"));
 	    });
 	    
         get("/near.html", (req, res) -> {
         	Map<String, Object> context = new HashMap<>();
         	UserSession userSession = sessionService.getSession(req.cookie("session"));
         	UserContext user = userSession.getContext();
+        	HouseholdContext origin;
+        	String h = req.queryParams("h");
+        	if (h == null || h.isEmpty()) origin = user.getHouseholds().get(0);
+        	else origin = user.getHouseholds().get(Integer.parseInt(h));
+        	List<Carpool> sorted = CarpoolSorter.sort(origin, 
+        	        ContextCache.getHouseholds());
+        	if (h == null || h.isEmpty()) context.put("h", 0);
+        	else context.put("h", Integer.parseInt(h));
+        	context.put("user", user);
+        	context.put("sorted", sorted);
         	return new ModelAndView(context, REQ_APP_DIR + "near.peb");
         }, pebbleEngine);
         
@@ -80,7 +95,7 @@ public class LeWebserver {
         });
         
         get("/login", (req, res) -> {
-            res.redirect("/near");
+            res.redirect("/");
             return "You are being redirected. Please wait a moment.";
         });
         
