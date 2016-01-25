@@ -48,7 +48,7 @@ public class Tests {
             hstyles = new StaticHouseholdContext("ChIJbyYs5Lq9woARGCPuoQHSAOU", new Coordinates(34.1166198,-118.4282923), "9551 Oak Pass Rd, Beverly Hills CA 90210", hstylesList);
             ustyles = new StaticUserContext(
                     "styles", "Harry", "Styles",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hstyles),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
@@ -66,7 +66,7 @@ public class Tests {
             hlopez = new StaticHouseholdContext("ChIJda7CvwOewoARsOXdX1E0DiM", new Coordinates(34.1590284,-118.671013), "25067 Jim Bridger Rd, Hidden Hills CA 91302", hlopezList);
             ulopez = new StaticUserContext(
                     "lopez", "Jennifer", "Lopez",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hlopez),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
@@ -84,7 +84,7 @@ public class Tests {
             hdiggs = new StaticHouseholdContext("ChIJO5FRUna-woARjOtCiNkJLk4", new Coordinates(34.1260934,-118.392789), "3121 Oakdell Ln, Studio City CA 91604", hdiggsList);
             udiggs = new StaticUserContext(
                     "diggs", "Taye", "Diggs",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hdiggs),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
@@ -102,7 +102,7 @@ public class Tests {
             hgyllenhaal = new StaticHouseholdContext("ChIJBTaFA1e-woARMObwuJHeaVo", new Coordinates(34.1249714,-118.357476), "7411 Woodrow Wilson Dr, Los Angeles CA 90046", hgyllenhaalList);
             ugyllenhaal = new StaticUserContext(
                     "gyllenhaal", "Jake", "Gyllenhaal",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hgyllenhaal),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
@@ -123,7 +123,7 @@ public class Tests {
             hbrady = new StaticHouseholdContext("12780 Chalon Rd, Los Angeles CA 90049", new Coordinates(34.0826514,-118.499961), "12780 Chalon Rd, Los Angeles CA 90049", hbradyList);
             ubrady = new StaticUserContext(
                     "brady", "Tom", "Brady",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hbrady),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
@@ -141,7 +141,7 @@ public class Tests {
             hbush = new StaticHouseholdContext("ChIJd5KdwJm-woARyofkux_l_1I", new Coordinates(34.0982484,-118.384908), "1501 Viewsite Ter, Los Angeles CA 90069", hbushList);
             ubush = new StaticUserContext(
                     "bush", "Reggie", "Bush",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hbush),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
@@ -159,7 +159,7 @@ public class Tests {
             hpage = new StaticHouseholdContext("ChIJxfixCW2-woARjPNYGzUP15w", new Coordinates(34.1339754,-118.381465), "11283 Canton Dr, Studio City CA 91604", hpageList);
             upage = new StaticUserContext(
                     "page", "Ellen", "Page",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hpage),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
@@ -176,7 +176,7 @@ public class Tests {
             hrihanna = new StaticHouseholdContext("ChIJWUb-xWajwoARUWrX0ra8jCk", new Coordinates(34.0469824,-118.515953), "932 Rivas Canyon Road, Pacific Palisades CA 90272", hrihannaList);
             urihanna = new StaticUserContext(
                     "rihanna", "Robyn", "(Rhianna) Fenty",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hrihanna),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
@@ -194,7 +194,7 @@ public class Tests {
             hvergara = new StaticHouseholdContext("ChIJDfLL9ka8woARZSQcNOSGzXI", new Coordinates(34.0925824,-118.422409), "1156 San Ysidro Dr, Beverly Hills CA 90210", hvergaraList);
             uvergara = new StaticUserContext(
                     "vergara", "Sofia", "Vergara",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hvergara),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
@@ -212,7 +212,7 @@ public class Tests {
             hcowell = new StaticHouseholdContext("ChIJ7VcMziO8woAROPHe-17QUIo", new Coordinates(34.0932954,-118.401788), "917 Loma Vista Dr, Beverly Hills CA 90210", hcowellList);
             ucowell = new StaticUserContext(
                     "cowell", "Simon", "Cowell",
-                    Lists.newArrayList(),
+                    Lists.newArrayList(hcowell),
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),

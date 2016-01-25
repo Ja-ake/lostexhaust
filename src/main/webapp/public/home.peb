@@ -6,13 +6,24 @@
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
-    <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
+    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Your household</span></a></li>
     <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
   </ul></div>
   <div class="content">
-    <h1 class="page-title">Household</h1>
+    <h1 class="page-title">Your Household</h1>
     <div class="household-info">
       <div class="profile-section">
+        <span class="household-select">Current household:  
+          <select onchange="javascript:window.location.href='/home.html?h='+this.selectedIndex;">
+            {% for household in user.households %}
+	          {% if loop.index == h %}
+	            <option selected="selected" value="{{ loop.index }}">{{ household.address }}</option>
+	          {% else %}
+	            <option value="{{ loop.index }}">{{ household.address }}</option>
+	          {% endif %}
+	        {% endfor %}
+	      </select>
+	    </span><hr class="near">
         <br><b>{{ address }}</b><hr align="left" class="household">
         <iframe
           class="google-map-household"

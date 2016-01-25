@@ -6,7 +6,7 @@
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Households near you</span></a></li>
-    <li class="pe"><a class="pe" href="household.html"><span class="pe">Your household</span></a></li>
+    <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
     <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
   </ul></div>
   <div class="content">
@@ -23,7 +23,7 @@
 	</select></span><hr class="near">
 	{% for carpool in sorted %}
   	<div class="household">
-  	  <span class="address"><a class="household" href="javascript:;">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
+  	  <span class="address"><a class="household" href="household.html?h={{ carpool.household.placeId }}">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
   	  <span class="resident-pictures">
   	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
   	  	  <img width="80" height="100" src="img/{{ resident.id }}.jpg">

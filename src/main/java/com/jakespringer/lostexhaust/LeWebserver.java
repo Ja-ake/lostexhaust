@@ -8,6 +8,8 @@
 
 package com.jakespringer.lostexhaust;
 import static spark.Spark.get;
+
+
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -15,6 +17,11 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+import spark.ModelAndView;
+
+
 import com.jakespringer.lostexhaust.near.Carpool;
 import com.jakespringer.lostexhaust.near.CarpoolSorter;
 import com.jakespringer.lostexhaust.test.JakeTestSessionService;
@@ -26,7 +33,6 @@ import com.jakespringer.lostexhaust.user.UserContext;
 import com.jakespringer.lostexhaust.user.UserContextFactory;
 import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
-import spark.ModelAndView;
 
 public class LeWebserver {
 	public static final String REQ_APP_DIR = "/" + System.getProperty("user.dir").substring(1) + "/src/main/webapp/public/";
@@ -57,11 +63,33 @@ public class LeWebserver {
         	return new ModelAndView(context, REQ_APP_DIR + "near.peb");
         }, pebbleEngine);
         
+        get("/home.html", (req, res) -> {
+            Map<String, Object> context = new HashMap<>();
+            UserSession userSession = sessionService.getSession(req.cookie("session"));
+            UserContext user = userSession.getContext();
+            HouseholdContext household;
+        	String h = req.queryParams("h");
+        	if (h == null || h.isEmpty()) household = user.getHouseholds().get(0);
+        	else household = user.getHouseholds().get(Integer.parseInt(h));
+        	if (h == null || h.isEmpty()) context.put("h", 0);
+        	else context.put("h", Integer.parseInt(h));
+        	context.put("user", user);
+            context.put("nickname", user.getFirstname());
+            context.put("address", household.getAddress());
+            context.put("place_id", household.getPlaceId());
+            context.put("inhabitants", household.getResidents());
+            return new ModelAndView(context, REQ_APP_DIR + "home.peb");
+        }, pebbleEngine);
+        
         get("/household.html", (req, res) -> {
             Map<String, Object> context = new HashMap<>();
             UserSession userSession = sessionService.getSession(req.cookie("session"));
             UserContext user = userSession.getContext();
-            HouseholdContext household = user.getHouseholds().get(0);
+            String h = req.queryParams("h");
+            HouseholdContext household;
+            if (h == null || h.isEmpty()) household = user.getHouseholds().get(0);
+        	else household = HouseholdContextFactory.get(h);
+            //context.put("user", user);
             context.put("nickname", user.getFirstname());
             context.put("address", household.getAddress());
             context.put("place_id", household.getPlaceId());
@@ -100,7 +128,7 @@ public class LeWebserver {
         });
         
         get("/logout", (req, res) -> {
-            res.redirect("https://www.lostexhaust.org/");
+            res.redirect("/");
             return "You are being redirected. Please wait a moment."; 
         });
         

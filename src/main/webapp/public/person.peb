@@ -6,8 +6,8 @@
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
-    <li class="pe"><a class="pe" href="household.html"><span class="pe">Your household</span></a></li>
-    <li class="pe"><a class="pe" href="javascript:;"><span class="pe">Your profile</span></a></li>
+    <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
+    <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
   </ul></div>
   <div class="content">
     <h1 class="page-title">Profile</h1>
@@ -35,7 +35,7 @@
         <b>Households</b><hr align="left" class="profile">
         {% for household in person.households %}
           <span class="profile-info-field"><i>Address</i></span>
-          <span class="profile-info-entry"><a class="household" href="household.html">{{ household.address }}</a></span><hr align="left" class="profile">
+          <span class="profile-info-entry"><a class="household" href="household.html?h={{ household.placeId }}">{{ household.address }}</a></span><hr align="left" class="profile">
         {% endfor %}
       </div>
       <div class="profile-section">
