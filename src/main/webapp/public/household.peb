@@ -3,7 +3,7 @@
   <link rel="stylesheet" type="text/css" href="style/template.css"></link>
 </head>
 <body>
-  <div class="portal"><ul class="portal">
+  <div class="portal"><ul clas	s="portal">
     <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
     <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
