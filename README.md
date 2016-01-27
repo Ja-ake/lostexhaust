@@ -1,5 +1,5 @@
 # Lost Exhaust
-(lostexhaust.org)[http://www.lostexhaust.org] - Site not up (yet).
+http://www.lostexhaust.org - Site not up (yet).
 Author: Jake Springer
 
 A web-based carpool application.
