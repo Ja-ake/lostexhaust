@@ -18,7 +18,6 @@ public class CatlinSessionService implements SessionService {
     public UserSession getSession(String cookie, String ip) {
         CatlinCrypto.Key key = CatlinCrypto.getMessageFromString(cookie);
         if (key == null || !key.ip.equals(ip)) {
-            System.out.println(ip);
             return null;
         } else {
             // prune sessions

@@ -77,7 +77,7 @@ public class CatlinCrypto {
 
             return new Key(id, timestamp, ip);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 
