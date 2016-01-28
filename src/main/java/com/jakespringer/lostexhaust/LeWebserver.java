@@ -71,6 +71,7 @@ public class LeWebserver {
 	    
         get("/near.html", (req, res) -> {
         	UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
+        	System.out.println("Session ip: "+userSession.getIp() + " " + req.ip());
 	        if (userSession != null) {
 	        	Map<String, Object> context = new HashMap<>();
         		UserContext user = userSession.getContext();
