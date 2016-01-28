@@ -71,7 +71,12 @@ public class LeWebserver {
 	    
         get("/near.html", (req, res) -> {
         	UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
-        	System.out.println("Session ip: "+userSession.getIp() + " " + req.ip());
+        	if (userSession!=null) {
+        		System.out.println("Session ip: "+userSession.getIp() + " " + req.ip());
+        	} else {
+        		System.out.println("Cookie: " + req.cookie("session"));
+        		System.out.println("Invalid cookie: " + CatlinCrypto.decryptRSA(req.cookie("session"), CONF_DIR + "public.der"));
+        	}
 	        if (userSession != null) {
 	        	Map<String, Object> context = new HashMap<>();
         		UserContext user = userSession.getContext();
