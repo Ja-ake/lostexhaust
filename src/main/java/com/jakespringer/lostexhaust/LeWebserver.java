@@ -75,7 +75,7 @@ public class LeWebserver {
         	if (userSession!=null) {
         		System.out.println("Session ip: "+userSession.getIp() + " " + req.ip());
         	} else {
-        		System.out.println("Cookie: " + req.cookie("session"));
+        		System.out.println("Cookie: %" + req.cookie("session") + "%");
         		System.out.println("Invalid cookie: " + CatlinCrypto.decryptRSA(req.cookie("session"), CONF_DIR + "public.der"));
         	}
 	        if (userSession != null) {
