@@ -47,7 +47,7 @@ public class NicholasTestUserContext implements UserContext {
     @Override
     public byte[] getProfilePicture() {
         try {
-            return Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR + "/src/main/webapp/public/img/ST19029-large.jpg"));
+            return Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR + "/src/main/webapp/public/img/ST19029-large.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
             return new byte[0];

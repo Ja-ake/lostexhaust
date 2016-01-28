@@ -52,7 +52,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/styles.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/styles.jpg"))
                 );
             hstylesList.add(ustyles);
             hstylesList.add(juc);
@@ -70,7 +70,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/lopez.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/lopez.jpg"))
                 );
             hlopezList.add(ulopez);
             hlopezList.add(nuc);
@@ -88,7 +88,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/diggs.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/diggs.jpg"))
                 );
             hdiggsList.add(udiggs);
             hdiggsList.add(juc);
@@ -106,7 +106,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/gyllenhaal.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/gyllenhaal.jpg"))
                 );
             hgyllenhaalList.add(ugyllenhaal);
             hgyllenhaalList.add(nuc);
@@ -127,7 +127,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/brady.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/brady.jpg"))
                 );
             hbradyList.add(ubrady);
             hbradyList.add(juc);
@@ -145,7 +145,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/bush.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/bush.jpg"))
                 );
             hbushList.add(ubush);
             hbushList.add(nuc);
@@ -163,7 +163,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/page.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/page.jpg"))
                 );
             hpageList.add(upage);
             ContextCache.addUser(upage);
@@ -180,7 +180,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/rihanna.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/rihanna.jpg"))
                 );
             hrihannaList.add(urihanna);
             hrihannaList.add(nuc);
@@ -198,7 +198,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(juc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/vergara.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/vergara.jpg"))
                 );
             hvergaraList.add(uvergara);
             hvergaraList.add(juc);
@@ -216,7 +216,7 @@ public class Tests {
                     "Student", "11", "2017",
                     Lists.newArrayList(new Contact("Primary Email", "local@domain.tld")),
                     Lists.newArrayList(new Relationship(nuc, "Friend")),
-                    Files.readAllBytes(Paths.get(LeWebserver.REQ_APP_DIR+"img/cowell.jpg"))
+                    Files.readAllBytes(Paths.get(LeWebserver.PUB_DIR+"img/cowell.jpg"))
                 );
             hcowellList.add(ucowell);
             hcowellList.add(nuc);

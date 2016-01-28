@@ -9,7 +9,6 @@
 package com.jakespringer.lostexhaust;
 import static spark.Spark.get;
 
-
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -18,9 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import spark.ModelAndView;
-
 
 import com.jakespringer.lostexhaust.near.Carpool;
 import com.jakespringer.lostexhaust.near.CarpoolSorter;
@@ -35,7 +32,8 @@ import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
 
 public class LeWebserver {
-	public static final String REQ_APP_DIR = "/" + System.getProperty("user.dir").substring(1) + "/src/main/webapp/public/";
+	public static final String PUB_DIR = System.getProperty("user.dir") + "/src/main/webapp/public/";
+	public static final String CONF_DIR = System.getProperty("user.dir") + "/src/main/webapp/config/";
 	
 	public static void main(String[] args) {
 	    Pebble2TemplateEngine pebbleEngine = new Pebble2TemplateEngine();
@@ -43,7 +41,7 @@ public class LeWebserver {
 	    SessionService sessionService = new JakeTestSessionService();
 	    
 	    get("/", (req, res) -> {
-	        return Files.readAllBytes(Paths.get(REQ_APP_DIR + "embed.html"));
+	        return Files.readAllBytes(Paths.get(PUB_DIR + "embed.html"));
 	    });
 	    
         get("/near.html", (req, res) -> {
@@ -60,7 +58,7 @@ public class LeWebserver {
         	else context.put("h", Integer.parseInt(h));
         	context.put("user", user);
         	context.put("sorted", sorted);
-        	return new ModelAndView(context, REQ_APP_DIR + "near.peb");
+        	return new ModelAndView(context, PUB_DIR + "near.peb");
         }, pebbleEngine);
         
         get("/home.html", (req, res) -> {
@@ -78,7 +76,7 @@ public class LeWebserver {
             context.put("address", household.getAddress());
             context.put("place_id", household.getPlaceId());
             context.put("inhabitants", household.getResidents());
-            return new ModelAndView(context, REQ_APP_DIR + "home.peb");
+            return new ModelAndView(context, PUB_DIR + "home.peb");
         }, pebbleEngine);
         
         get("/household.html", (req, res) -> {
@@ -94,7 +92,7 @@ public class LeWebserver {
             context.put("address", household.getAddress());
             context.put("place_id", household.getPlaceId());
             context.put("inhabitants", household.getResidents());
-            return new ModelAndView(context, REQ_APP_DIR + "household.peb");
+            return new ModelAndView(context, PUB_DIR + "household.peb");
         }, pebbleEngine);
         
         get("/profile.html", (req, res) -> {
@@ -102,7 +100,7 @@ public class LeWebserver {
             UserSession userSession = sessionService.getSession(req.cookie("session"));
             UserContext user = userSession.getContext();
             context.put("user", user);
-            return new ModelAndView(context, REQ_APP_DIR + "profile.peb");
+            return new ModelAndView(context, PUB_DIR + "profile.peb");
         }, pebbleEngine);
         
         get("/person.html", (req, res) -> {
@@ -112,7 +110,7 @@ public class LeWebserver {
             String p = req.queryParams("p");
             context.put("user", user);
             context.put("person", UserContextFactory.get(p));
-            return new ModelAndView(context, REQ_APP_DIR + "person.peb");
+            return new ModelAndView(context, PUB_DIR + "person.peb");
         }, pebbleEngine);
         
         get("/img/me.jpg", (req, res) -> {
@@ -137,7 +135,7 @@ public class LeWebserver {
             if (LeService.suffixMatches("/"+path,
                     "htm", "html", "jpg", "jpeg", "png", "js", "css")) {
                 try {
-                    return Files.readAllBytes(Paths.get(REQ_APP_DIR, path));
+                    return Files.readAllBytes(Paths.get(PUB_DIR, path));
                 } catch (NoSuchFileException | FileNotFoundException e) {
                     return "<h2>404 Not Found.</h2>";
                 }
