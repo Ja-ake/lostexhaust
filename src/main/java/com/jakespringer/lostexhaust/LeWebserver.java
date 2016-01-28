@@ -37,6 +37,7 @@ public class LeWebserver {
 	public static final String CONF_DIR = System.getProperty("user.dir") + "/src/main/webapp/config/";
 	
 	public static void main(String[] args) {
+		System.out.println(System.getProperty("java.vendor") + " " + System.getProperty("java.version"));
 		// deal with arguments
 		int port = 4567;
 		boolean pflag = false;
