@@ -8,7 +8,6 @@
 
 package com.jakespringer.lostexhaust;
 import static spark.Spark.get;
-
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -16,9 +15,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import spark.ModelAndView;
-
 import com.jakespringer.lostexhaust.near.Carpool;
 import com.jakespringer.lostexhaust.near.CarpoolSorter;
 import com.jakespringer.lostexhaust.test.JakeTestSessionService;
@@ -30,6 +26,8 @@ import com.jakespringer.lostexhaust.user.UserContext;
 import com.jakespringer.lostexhaust.user.UserContextFactory;
 import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
+import com.jakespringer.lostexhaust.auth.*;
+import spark.ModelAndView;
 
 public class LeWebserver {
 	public static final String PUB_DIR = System.getProperty("user.dir") + "/src/main/webapp/public/";
@@ -38,7 +36,7 @@ public class LeWebserver {
 	public static void main(String[] args) {
 	    Pebble2TemplateEngine pebbleEngine = new Pebble2TemplateEngine();
 	    
-	    SessionService sessionService = new JakeTestSessionService();
+	    SessionService sessionService = new CatlinSessionService();
 	    
 	    get("/", (req, res) -> {
 	        return Files.readAllBytes(Paths.get(PUB_DIR + "embed.html"));
@@ -46,7 +44,7 @@ public class LeWebserver {
 	    
         get("/near.html", (req, res) -> {
         	Map<String, Object> context = new HashMap<>();
-        	UserSession userSession = sessionService.getSession(req.cookie("session"));
+        	UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
         	UserContext user = userSession.getContext();
         	HouseholdContext origin;
         	String h = req.queryParams("h");
@@ -63,7 +61,7 @@ public class LeWebserver {
         
         get("/home.html", (req, res) -> {
             Map<String, Object> context = new HashMap<>();
-            UserSession userSession = sessionService.getSession(req.cookie("session"));
+            UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
             UserContext user = userSession.getContext();
             HouseholdContext household;
         	String h = req.queryParams("h");
@@ -81,7 +79,7 @@ public class LeWebserver {
         
         get("/household.html", (req, res) -> {
             Map<String, Object> context = new HashMap<>();
-            UserSession userSession = sessionService.getSession(req.cookie("session"));
+            UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
             UserContext user = userSession.getContext();
             String h = req.queryParams("h");
             HouseholdContext household;
@@ -97,7 +95,7 @@ public class LeWebserver {
         
         get("/profile.html", (req, res) -> {
             Map<String, Object> context = new HashMap<>();
-            UserSession userSession = sessionService.getSession(req.cookie("session"));
+            UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
             UserContext user = userSession.getContext();
             context.put("user", user);
             return new ModelAndView(context, PUB_DIR + "profile.peb");
@@ -105,7 +103,7 @@ public class LeWebserver {
         
         get("/person.html", (req, res) -> {
             Map<String, Object> context = new HashMap<>();
-            UserSession userSession = sessionService.getSession(req.cookie("session"));
+            UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
             UserContext user = userSession.getContext();
             String p = req.queryParams("p");
             context.put("user", user);
@@ -115,17 +113,25 @@ public class LeWebserver {
         
         get("/img/me.jpg", (req, res) -> {
             return sessionService
-                    .getSession(req.cookie("session"))
+                    .getSession(req.cookie("session"), req.ip())
                     .getContext()
                     .getProfilePicture();
         });
         
         get("/login", (req, res) -> {
+            String token = req.queryParams("token");
+            res.header("Expires", "Thu, 19 Nov 1981 08:52:00 GMT");
+            res.header("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+            res.header("Pragma", "no-cache");
+            if (token != null && !token.isEmpty()) {
+                res.cookie("session", token);
+            }
             res.redirect("/");
             return "You are being redirected. Please wait a moment.";
         });
         
         get("/logout", (req, res) -> {
+            res.removeCookie("session");
             res.redirect("/");
             return "You are being redirected. Please wait a moment."; 
         });

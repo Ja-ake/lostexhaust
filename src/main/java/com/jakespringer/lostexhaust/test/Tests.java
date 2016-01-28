@@ -223,6 +223,8 @@ public class Tests {
             ContextCache.addUser(ucowell);
             ContextCache.addHousehold(hcowell);
             
+            
+            ContextCache.addUser(juc);
         } catch (IOException e) {
             e.printStackTrace();
         }

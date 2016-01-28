@@ -8,7 +8,7 @@ public class JakeTestSessionService implements SessionService {
     private UserSession testSession = new UserSession(Tests.juc, "127.0.0.1", Timestamp.currentTime());
 
     @Override
-    public UserSession getSession(String cookie) {
+    public UserSession getSession(String cookie, String ip) {
         return testSession;
     }
 }

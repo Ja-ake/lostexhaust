@@ -8,7 +8,7 @@ public class NicholasTestSessionService implements SessionService {
     private UserSession testSession = new UserSession(Tests.nuc, "127.0.0.1", new Timestamp(0));
 
     @Override
-    public UserSession getSession(String cookie) {
+    public UserSession getSession(String cookie, String ip) {
         return testSession;
     }
 }
