@@ -1,4 +1,6 @@
-## Lost Exhaust
+# Lost Exhaust
+http://www.lostexhaust.org - Site not up (yet).
+Author: Jake Springer
 
 A web-based carpool application.
 See LICENCE for information on the licencing.
