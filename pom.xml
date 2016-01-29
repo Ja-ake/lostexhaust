@@ -53,6 +53,7 @@
 				</executions>
      		 </plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.7</version>
 				<dependencies>
@@ -80,6 +81,11 @@
 						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<nonFilteredFileExtensions>                            
+				    	<nonFilteredFileExtension>der</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
