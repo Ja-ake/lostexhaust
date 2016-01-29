@@ -17,7 +17,9 @@ public class CatlinSessionService implements SessionService {
     @Override
     public UserSession getSession(String cookie, String ip) {
         CatlinCrypto.Key key = CatlinCrypto.getMessageFromString(cookie);
-        if (key == null || !key.ip.equals(ip)) {
+        if (key == null
+        		//|| !key.ip.equals(ip)
+        		) {
             return null;
         } else {
             // prune sessions
@@ -27,17 +29,18 @@ public class CatlinSessionService implements SessionService {
             Optional<UserSession> possibleSession = sessions.stream().filter(x -> {
                 try {
                     return x.isStillValid() 
-                        && x.getIp().equals(ip)
+                        //&& x.getIp().equals(ip)
                         && x.getContext().getId().equals(key.id);
                 } catch (SessionExpiredException e) {
                     // should never happen
                     return false;
                 }
             }).findFirst();
-            
+                        
             if (possibleSession.isPresent()) return possibleSession.get();
             
             // second, check the user cache
+            System.out.println(ContextCache.getUsers().size());
             Optional<UserContext> possibleContext = ContextCache.getUsers().stream().filter(x -> 
                     x.getId().equals(key.id)).findFirst();
             

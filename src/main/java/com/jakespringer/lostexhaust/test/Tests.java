@@ -42,7 +42,7 @@ public class Tests {
     public static StaticHouseholdContext hcowell;
     public static StaticUserContext ucowell;
     
-    static {
+    public static void test() {
         try {
             List<UserContext> hstylesList = new ArrayList<>();
             hstyles = new StaticHouseholdContext("ChIJbyYs5Lq9woARGCPuoQHSAOU", new Coordinates(34.1166198,-118.4282923), "9551 Oak Pass Rd, Beverly Hills CA 90210", hstylesList);

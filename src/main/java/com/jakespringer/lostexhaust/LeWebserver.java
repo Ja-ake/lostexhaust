@@ -19,6 +19,7 @@ import java.util.Map;
 
 import com.jakespringer.lostexhaust.near.Carpool;
 import com.jakespringer.lostexhaust.near.CarpoolSorter;
+import com.jakespringer.lostexhaust.test.Tests;
 import com.jakespringer.lostexhaust.user.ContextCache;
 import com.jakespringer.lostexhaust.user.HouseholdContext;
 import com.jakespringer.lostexhaust.user.HouseholdContextFactory;
@@ -60,6 +61,7 @@ public class LeWebserver {
 			}
 		}
 		
+		Tests.test();
 		
 		// ignite spark
 	    Spark.port(port);
