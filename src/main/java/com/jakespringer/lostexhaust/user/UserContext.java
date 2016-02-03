@@ -13,4 +13,8 @@ public interface UserContext {
     public List<Contact> getContactInfo();
     public List<Relationship> getRelationships();
     public byte[] getProfilePicture();
+    
+    public default void update() {
+        // do nothing by default
+    }
 }
