@@ -38,8 +38,6 @@ public class LeWebserver {
 	public static final String CONF_DIR = System.getProperty("user.dir") + "/src/main/webapp/config/";
 	
 	public static void main(String[] args) {
-		CatlinCrypto.test();
-		System.out.println(System.getProperty("java.vendor") + " " + System.getProperty("java.version"));
 		// deal with arguments
 		int port = 4567;
 		boolean pflag = false;
@@ -75,12 +73,6 @@ public class LeWebserver {
 	    
         get("/near.html", (req, res) -> {
         	UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
-        	if (userSession!=null) {
-        		System.out.println("Session ip: "+userSession.getIp() + " " + req.ip());
-        	} else {
-        		System.out.println("Cookie: %" + req.cookie("session") + "%");
-        		System.out.println("Invalid cookie: " + CatlinCrypto.decryptRSA(req.cookie("session"), CONF_DIR + "public.der"));
-        	}
 	        if (userSession != null) {
 	        	Map<String, Object> context = new HashMap<>();
         		UserContext user = userSession.getContext();

@@ -17,7 +17,6 @@ public class ContextCache {
     }
     
     public static void addUser(UserContext c) {
-    	System.out.println("added a user named " + c.getFirstname());
         if (c == null) throw new NullPointerException();
         users.removeIf(e -> e.getId().equals(c.getId()));
         users.add(c);
