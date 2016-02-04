@@ -10,8 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class CatlinSql {
+	public static final CatlinSql inst = new CatlinSql();
+	
 	private final String username = "lostexhaust";
-	private final String password = "k7Dqu2zYV91aJhwlAB8fQ";
+	private final String password = ""; // no one knows
 	private final String database = "lostexhaust";
 	private final String hostname = "localhost";
 	private final int port = 3306;
@@ -20,7 +22,7 @@ public class CatlinSql {
 	
 	private Connection connection;
 	
-	List<String> getHouseholdsFromUser(String userId) throws SQLException {
+	public synchronized List<String> getHouseholdsFromUser(String userId) throws SQLException {
 		// SELECT householdid FROM lostexhaust.lookup
 		// WHERE userid = '?'
 		
@@ -41,7 +43,7 @@ public class CatlinSql {
 		return Collections.unmodifiableList(householdIds);
 	}
 	
-	List<String> getUsersFromHousehold(String householdId) throws SQLException {
+	public synchronized List<String> getUsersFromHousehold(String householdId) throws SQLException {
 		// SELECT householdid FROM lostexhaust.lookup
 		// WHERE userid = '?'
 		

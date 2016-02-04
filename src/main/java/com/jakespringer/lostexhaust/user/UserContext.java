@@ -14,7 +14,7 @@ public interface UserContext {
     public List<Relationship> getRelationships();
     public byte[] getProfilePicture();
     
-    public default void update() {
+    public default void invalidate() {
         // do nothing by default
     }
 }
