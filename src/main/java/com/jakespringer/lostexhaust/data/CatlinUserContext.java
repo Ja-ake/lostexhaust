@@ -1,10 +1,13 @@
 package com.jakespringer.lostexhaust.data;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import com.jakespringer.lostexhaust.user.Contact;
 import com.jakespringer.lostexhaust.user.HouseholdContext;
+import com.jakespringer.lostexhaust.user.HouseholdContextFactory;
 import com.jakespringer.lostexhaust.user.Relationship;
 import com.jakespringer.lostexhaust.user.UserContext;
 
@@ -13,6 +16,7 @@ public class CatlinUserContext implements UserContext {
     private final String userId;
     private CatlinPerson personDetails;
     private byte[] profilePicture;
+    private List<HouseholdContext> households;
     
     public CatlinUserContext(String _userId) {
         userId = _userId;
@@ -37,7 +41,8 @@ public class CatlinUserContext implements UserContext {
 
     @Override
     public List<HouseholdContext> getHouseholds() {
-    	CatlinSql s
+    	ifNeededUpdateHouseholds();
+        return Collections.unmodifiableList(households);
     }
 
     @Override
@@ -80,6 +85,20 @@ public class CatlinUserContext implements UserContext {
     public void invalidate() {
     	personDetails = null;
     	profilePicture = null;
+    	households = null;
+    }
+    
+    private void ifNeededUpdateHouseholds() {
+        if (households == null) {
+            try {
+                households = CatlinSql.inst.getHouseholdsFromUser(userId)
+                        .stream()
+                        .map(HouseholdContextFactory::get)
+                        .collect(Collectors.toList());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
     
     private void ifNeededUpdateDetails() {

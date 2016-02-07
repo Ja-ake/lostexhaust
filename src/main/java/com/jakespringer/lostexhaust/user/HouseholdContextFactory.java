@@ -1,16 +1,17 @@
 package com.jakespringer.lostexhaust.user;
 
 import java.util.List;
+import com.jakespringer.lostexhaust.data.CatlinHouseholdContext;
 
 public class HouseholdContextFactory {
-    public static HouseholdContext get(String placeid) {
+    public static HouseholdContext get(String id) {
         List<HouseholdContext> households = ContextCache.getHouseholds();
         for (HouseholdContext household : households) {
-            if (household.getPlaceId().equals(placeid)) {
+            if (household.getId().equals(id)) {
                 return household;
             }
         }
         
-        return null;
+        return new CatlinHouseholdContext(id);
     }
 }

@@ -23,7 +23,7 @@
 	</select></span><hr class="near">
 	{% for carpool in sorted %}
   	<div class="household">
-  	  <span class="address"><a class="household" href="household.html?h={{ carpool.household.placeId }}">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
+  	  <span class="address"><a class="household" href="household.html?h={{ carpool.household.id }}">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
   	  <span class="resident-pictures">
   	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
   	  	  <img width="80" height="100" src="img/{{ resident.id }}.jpg">

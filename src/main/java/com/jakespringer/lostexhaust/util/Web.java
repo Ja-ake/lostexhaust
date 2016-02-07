@@ -11,6 +11,8 @@ import jetbrick.io.IoUtils;
 
 public class Web {
     public static String getRequest(String urlToRead) throws IOException {
+        System.out.println("[GET-REQUEST] Requesting " + urlToRead + ".");
+        
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -25,6 +27,8 @@ public class Web {
     }
     
     public static byte[] getRequestBytes(String urlToRead) throws IOException {
+        System.out.println("[GET-REQUEST] Requesting " + urlToRead + ".");
+        
         URL url = new URL(urlToRead);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");

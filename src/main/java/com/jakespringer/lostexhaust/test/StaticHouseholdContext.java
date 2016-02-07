@@ -39,4 +39,10 @@ public class StaticHouseholdContext implements HouseholdContext {
         return residents;
     }
 
+    @Override
+    public String getId() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

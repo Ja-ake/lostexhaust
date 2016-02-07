@@ -8,18 +8,21 @@
 
 package com.jakespringer.lostexhaust;
 import static spark.Spark.get;
-
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.stream.Collectors;
+import com.jakespringer.lostexhaust.auth.CatlinSessionService;
+import com.jakespringer.lostexhaust.data.CatlinApi;
+import com.jakespringer.lostexhaust.data.CatlinHouseholdContext;
+import com.jakespringer.lostexhaust.data.CatlinSql;
 import com.jakespringer.lostexhaust.near.Carpool;
 import com.jakespringer.lostexhaust.near.CarpoolSorter;
-import com.jakespringer.lostexhaust.test.Tests;
 import com.jakespringer.lostexhaust.user.ContextCache;
 import com.jakespringer.lostexhaust.user.HouseholdContext;
 import com.jakespringer.lostexhaust.user.HouseholdContextFactory;
@@ -28,8 +31,6 @@ import com.jakespringer.lostexhaust.user.UserContext;
 import com.jakespringer.lostexhaust.user.UserContextFactory;
 import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
-import com.jakespringer.lostexhaust.auth.*;
-
 import spark.ModelAndView;
 import spark.Spark;
 
@@ -59,7 +60,18 @@ public class LeWebserver {
 			}
 		}
 		
-		Tests.test();
+//		Tests.test();
+		
+		System.out.println("[LostExhaust] Loading Catlin household data...");
+		try {
+            CatlinSql.inst.getAllHouseholds()
+                .stream()
+                .map(x -> new CatlinHouseholdContext(x.id, x))
+                .forEach(ContextCache::addHousehold);
+        } catch (SQLException e1) {
+            throw new RuntimeException(e1);
+        }
+		System.out.println("[LostExhaust] Finished loading Catlin household data.");
 		
 		// ignite spark
 	    Spark.port(port);
@@ -81,7 +93,7 @@ public class LeWebserver {
 	        	if (h == null || h.isEmpty()) origin = user.getHouseholds().get(0);
 	        	else origin = user.getHouseholds().get(Integer.parseInt(h));
 	        	List<Carpool> sorted = CarpoolSorter.sort(origin, 
-	        	        ContextCache.getHouseholds());
+	        	        ContextCache.getHouseholds()).subList(0, 50);
 	        	if (h == null || h.isEmpty()) context.put("h", 0);
 	        	else context.put("h", Integer.parseInt(h));
 	        	context.put("user", user);
@@ -170,6 +182,20 @@ public class LeWebserver {
 	        } else {
 	        	return new byte[0];
 	        }
+        });
+        
+        get("/img/:user", (req, res) -> {
+            UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
+            if (userSession != null) {
+                String requestedId = req.params("user").split("\\.")[0];
+                if (CatlinApi.matchesId.test(requestedId)) {
+                    res.header("Content-Type", "image/jpeg");
+                    return UserContextFactory.get(requestedId).getProfilePicture();
+                }
+                return new byte[0];
+            } else {
+                return new byte[0];
+            }
         });
         
         get("/login", (req, res) -> {

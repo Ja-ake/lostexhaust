@@ -23,8 +23,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.json.JSONObject;
 
 public class LeService {
+    private static JSONObject config;
+    
     public static long getValidityDuration() {
         // 12 hours
         // TODO add to configuration
@@ -57,5 +62,22 @@ public class LeService {
         String suffix = getFileSuffix(path);
         for (String m : toMatch) if (suffix.equalsIgnoreCase(m)) return true;
         return false;
+    }
+    
+    public static JSONObject getConfig() {
+        if (config == null) {
+            try {
+                config = new JSONObject(
+                        new String(
+                                Files.readAllBytes(
+                                        Paths.get(
+                                                LeWebserver.CONF_DIR 
+                                                + "config.json"))));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        
+        return config;
     }
 }

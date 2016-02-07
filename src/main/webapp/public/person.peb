@@ -12,18 +12,18 @@
   <div class="content">
     <h1 class="page-title">Profile</h1>
     <div class="profile-header">
-      <img width="100px" class="profile-header" src="img/{{ person.id }}-large.jpg">
+      <img width="100px" class="profile-header" src="img/{{ person.id }}.jpg">
       <h2 class="profile-header">{{ person.firstname }} {{ person.lastname }}</h2><br>
       <h4 class="profile-header">{{ person.affiliation }}</h4>
     </div>
     <div class="profile-info">
       <div class="profile-section">
-        <b>Student Information</b><hr align="left" class="profile">
+        {% if person.gradeLevel is not null %}<b>Student Information</b><hr align="left" class="profile">
         <span class="profile-info-field"><i>Current Grade</i></span>
         <span class="profile-info-entry">{{ person.gradeLevel }}</span><hr align="left" class="profile">
         <span class="profile-info-field"><i>Class Of</i></span>
         <span class="profile-info-entry">{{ person.classYear }}</span><hr align="left" class="profile">
-      </div>
+      </div>{% endif %}
       <div class="profile-section">
         <b>Contact</b><hr align="left" class="profile">
         {% for contact in person.contactInfo %}
@@ -35,7 +35,7 @@
         <b>Households</b><hr align="left" class="profile">
         {% for household in person.households %}
           <span class="profile-info-field"><i>Address</i></span>
-          <span class="profile-info-entry"><a class="household" href="household.html?h={{ household.placeId }}">{{ household.address }}</a></span><hr align="left" class="profile">
+          <span class="profile-info-entry"><a class="household" href="household.html?h={{ household.id }}">{{ household.address }}</a></span><hr align="left" class="profile">
         {% endfor %}
       </div>
       <div class="profile-section">

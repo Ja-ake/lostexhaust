@@ -26,4 +26,10 @@ public class JakeTestHouseholdContext implements HouseholdContext {
     public List<UserContext> getResidents() {
         return Lists.newArrayList(Tests.juc, Tests.nuc);
     }
+
+    @Override
+    public String getId() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -8,18 +8,20 @@ import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import com.jakespringer.lostexhaust.LeService;
 import com.jakespringer.lostexhaust.user.Contact;
 import com.jakespringer.lostexhaust.user.Relationship;
 import com.jakespringer.lostexhaust.util.Web;
 
+import static com.jakespringer.lostexhaust.util.Quick.succOrNull;
+
 public class CatlinApi {
-    private static String apiToken = "";
-    private static String photoToken = "";
-    private static String apiUrl = "https://inside.catlin.edu/api/lostexhaust/api.py";
-    private static String photoUrl = "https://inside.catlin.edu/api/lostexhaust/photo.php";
+    private static final String apiToken = LeService.getConfig().getString("catlin_api_token");
+    private static final String photoToken = LeService.getConfig().getString("catlin_photo_token");
+    private static final String apiUrl = LeService.getConfig().getString("catlin_api_url");
+    private static final String photoUrl = LeService.getConfig().getString("catlin_photo_url");
     
-    private static Predicate<String> matchesId = Pattern.compile("^(ST|FS|IN)[0-9]{1,10}$").asPredicate();
+    public static final Predicate<String> matchesId = Pattern.compile("^(ST|FS|IN)[0-9]{1,10}$").asPredicate();
     
     public static CatlinPerson getPerson(String userId) throws IOException {
         if (matchesId.test(userId)) {
@@ -37,12 +39,15 @@ public class CatlinApi {
                             ((JSONObject)x).getString("relationship"), 
                             ((JSONObject)x).getString("relation_firstname"), 
                             ((JSONObject)x).getString("relation_lastname") )));
-                        
-            return new CatlinPerson(personJson.getString("firstname"), 
-                    personJson.getString("lastname"), 
-                    personJson.getString("gradelevel"),
-                    personJson.getString("classyear"),
-                    personJson.getString("affiliation"),
+            
+            
+            // temp solution, todo remove succOrNull
+            return new CatlinPerson(
+                    succOrNull(() -> personJson.getString("firstname")), 
+                    succOrNull(() -> personJson.getString("lastname")), 
+                    succOrNull(() -> personJson.getString("gradelevel")),
+                    succOrNull(() -> personJson.getString("classyear")),
+                    succOrNull(() -> personJson.getString("affiliation")),
                     contacts,
                     relationships);
         } else {
@@ -56,11 +61,5 @@ public class CatlinApi {
     	} else {
             throw new RuntimeException("Invalid userId: " + userId);
         }
-    }
-    
-    public static void main(String[]args) throws IOException {
-//    	System.out.println("Completing.");
-//        Files.write(getProfilePicture("ST16421"), new File("ST16421.jpg"));
-//    	Files.write(Web.getRequestBytes("https://inside.catlin.edu/api/lostexhaust/photo.php?token=a92jHG6FqMXy71ZkJPoqajz915qaUTlsX7z&id=ST16421"), new File("me.jpg"));
     }
 }
