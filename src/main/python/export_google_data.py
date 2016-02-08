@@ -6,7 +6,7 @@ import sys
 from gmaps import Geocoding
 from gmaps import errors
 
-geo = Geocoding(api_key='AIzaSyB8iNxTT7H6JYCkjwsKqAwSIhGa-_byB-s')
+geo = Geocoding(api_key='')
 
 with mdb.connect('localhost', 'testuser', '', 'lostexhaust') as con:
     f = open("records.txt", "w")
