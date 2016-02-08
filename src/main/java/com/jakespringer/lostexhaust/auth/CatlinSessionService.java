@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.jakespringer.lostexhaust.LeService;
 import com.jakespringer.lostexhaust.data.CatlinSql;
 import com.jakespringer.lostexhaust.error.SessionExpiredException;
 import com.jakespringer.lostexhaust.user.ContextCache;
@@ -22,6 +23,8 @@ public class CatlinSessionService implements SessionService {
         CatlinCrypto.Key key = CatlinCrypto.getMessageFromString(cookie);
         if (key == null
         		|| !key.ip.equals(ip)
+        		|| !new Timestamp(key.timestamp).validate(Timestamp.currentTime(), 
+                        LeService.getValidityDuration())
         		) {
             return null;
         } else {
