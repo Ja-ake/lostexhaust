@@ -64,10 +64,10 @@ public class CatlinApi {
     }
     
     public static byte[] getProfilePicture(String userId) throws IOException {
-        Timer t = Timer.start("getProfilePicture("+userId+")");
+//        Timer t = Timer.start("getProfilePicture("+userId+")");
     	if (matchesId.test(userId)) {
     	    byte[] ret = Web.getRequestBytes(photoUrl + "?token=" + photoToken + "&id=" + userId);
-    		t.stop();
+//    		t.stop();
     	    return ret;
     	} else {
             throw new RuntimeException("Invalid userId: " + userId);
