@@ -4,7 +4,7 @@
 </head>
 <body>
   <div class="portal"><ul class="portal">
-    <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="javascript:;">Sign out</a></span></li>
+    <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
     <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Your household</span></a></li>
     <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
