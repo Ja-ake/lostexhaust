@@ -77,12 +77,8 @@ public class CatlinUserContext implements UserContext {
 
     @Override
     public byte[] getProfilePicture() {
-    	if (!userId.startsWith("IN")) {
-            ifNeededUpdatePicture();
-            return profilePicture;
-    	} else {
-    	    return new byte[0];
-    	}
+    	ifNeededUpdatePicture();
+        return profilePicture;
     }
 
     @Override
@@ -127,5 +123,10 @@ public class CatlinUserContext implements UserContext {
     
     public void requestPersonUpdate(CatlinPerson c) {
         if (personDetails == null) personDetails = c;
+    }
+    
+    
+    public boolean isParent() {
+        return userId.startsWith("IN");
     }
 }

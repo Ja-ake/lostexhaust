@@ -26,7 +26,7 @@
   	  <span class="address"><a class="household" href="household.html?h={{ carpool.household.id }}">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
   	  <span class="resident-pictures">
   	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
-  	  	  <img width="80" height="100" src="img/{{ resident.id }}.jpg">
+  	  	  {% if not resident.isParent %}<img width="80" height="100" src="img/{{ resident.id }}.jpg">{% endif %}
   	  	{% endfor %}
   	  </span>
   	  <span class="residents">
