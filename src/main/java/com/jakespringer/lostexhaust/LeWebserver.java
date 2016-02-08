@@ -85,7 +85,8 @@ public class LeWebserver {
 	    SessionService sessionService = new CatlinSessionService();
 	    
 	    get("/", (req, res) -> {
-	        return Files.readAllBytes(Paths.get(PUB_DIR + "embed.html"));
+	        res.redirect("/near.html");
+	        return "<a href=\"/near.html\">If your browser does not redirect you, click here.</a>";
 	    });
 	    
         get("/near.html", (req, res) -> {
