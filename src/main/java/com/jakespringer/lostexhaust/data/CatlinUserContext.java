@@ -77,8 +77,12 @@ public class CatlinUserContext implements UserContext {
 
     @Override
     public byte[] getProfilePicture() {
-    	ifNeededUpdatePicture();
-        return profilePicture;
+    	if (!userId.startsWith("IN")) {
+            ifNeededUpdatePicture();
+            return profilePicture;
+    	} else {
+    	    return new byte[0];
+    	}
     }
 
     @Override
