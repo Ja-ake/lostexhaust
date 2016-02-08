@@ -3,7 +3,7 @@
 <body>
 <center>
 <div style="margin-top: 12px">
-<iframe id="embedded" seamless="seamless" style="margin-left: auto; margin-right: auto; height: 200px; width: 63%; min-width: 500px; outline: none; border: 0px;" 
+<iframe target="_top" id="embedded" seamless="seamless" style="margin-left: auto; margin-right: auto; height: 250px; width: 63%; min-width: 500px; outline: none; border: 0px;" 
     src="https://inside.catlin.edu/api/lostexhaust/login.py"></iframe>
 </div>
 </center>
