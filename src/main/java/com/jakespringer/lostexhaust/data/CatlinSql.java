@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import com.jakespringer.lostexhaust.LeService;
 import com.jakespringer.lostexhaust.util.Quick;
+import com.jakespringer.lostexhaust.util.Timer;
 
 public class CatlinSql {
 	public static final CatlinSql inst = new CatlinSql();
@@ -57,7 +58,7 @@ public class CatlinSql {
 	public synchronized List<String> getUsersFromHousehold(String householdId) throws SQLException {
 		// SELECT householdid FROM lostexhaust.lookup
 		// WHERE userid = '?'
-		
+//	    Timer t = Timer.start("getUsersFromHousehold()");
 		tryReconnect();
 		
 		String statement = "SELECT person_id FROM " + lookupTable +
@@ -70,7 +71,7 @@ public class CatlinSql {
         			String userId = usersResult.getString("person_id");
         			userIds.add(userId);
         		}
-        		        		
+//                t.stop();	
         		return Collections.unmodifiableList(userIds);
     		}
 		}
@@ -104,6 +105,7 @@ public class CatlinSql {
 	}
 	
 	public synchronized List<CatlinHousehold> getAllHouseholds() throws SQLException {
+//	    Timer t = Timer.start("getAllHouseholds()");
 	    tryReconnect();
         
         String statement = "SELECT household_id,place_id,latitude,longitude,addressblock,city,state,postcode FROM " + householdsTable;
@@ -124,9 +126,10 @@ public class CatlinSql {
                         households.add(new CatlinHousehold(id, placeId, latitude, longitude, fullAddress));
                     }
                 }
+//                t.stop();
                 return Collections.unmodifiableList(households);
             }
-        }
+        }        
 	}
 	
 	public synchronized boolean verifyUser(String userId) throws SQLException {

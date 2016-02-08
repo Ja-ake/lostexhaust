@@ -104,7 +104,7 @@ public class CatlinUserContext implements UserContext {
     private void ifNeededUpdateDetails() {
     	if (personDetails == null) {
     		try {
-				personDetails = CatlinApi.getPerson(userId);
+				personDetails = CatlinApi.getPeople(userId).get(0);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -119,5 +119,9 @@ public class CatlinUserContext implements UserContext {
     			throw new RuntimeException(e);
     		}
     	}
+    }
+    
+    public void requestPersonUpdate(CatlinPerson c) {
+        if (personDetails == null) personDetails = c;
     }
 }

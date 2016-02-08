@@ -3,7 +3,7 @@
 <script src="https://code.jquery.com/jquery-git2.min.js"></script>
 </head>
 <body style="margin: 0px; padding: 0px;">
-<div style="width: 100%; height: 120px; background-color: #EEEEEE;"></div>
+<!-- <div style="width: 100%; height: 120px; background-color: #EEEEEE;"></div> -->
 <center>
 <div style="margin-top: 12px">
 <iframe id="embedded" seamless="seamless" style="margin-left: auto; margin-right: auto; height: 100%; width: 63%; min-width: 500px; outline: none; border: 0px;" 
@@ -12,12 +12,12 @@
 </center>
 </body>
 <script>
-$('iframe').load(function() {
-    this.style.height = $('iframe').contents().height();
-});
+//$('iframe').load(function() {
+//   this.style.height = $('iframe').contents().height();
+//});
 
-$(window).resize(function() {
-	$('#embedded').css("height", "" + ($('#embedded').contents().height()+16));
-});
+//$(window).resize(function() {
+//	$('#embedded').css("height", "" + ($('#embedded').contents().height()+16));
+//});
 </script>
 </html>

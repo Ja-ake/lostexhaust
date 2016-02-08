@@ -7,20 +7,24 @@
  */
 
 package com.jakespringer.lostexhaust;
-import static spark.Spark.get;
+
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import com.jakespringer.lostexhaust.auth.CatlinSessionService;
 import com.jakespringer.lostexhaust.data.CatlinApi;
 import com.jakespringer.lostexhaust.data.CatlinHouseholdContext;
+import com.jakespringer.lostexhaust.data.CatlinPerson;
 import com.jakespringer.lostexhaust.data.CatlinSql;
+import com.jakespringer.lostexhaust.data.CatlinUserContext;
 import com.jakespringer.lostexhaust.near.Carpool;
 import com.jakespringer.lostexhaust.near.CarpoolSorter;
 import com.jakespringer.lostexhaust.user.ContextCache;
@@ -33,6 +37,7 @@ import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
 import spark.ModelAndView;
 import spark.Spark;
+import static spark.Spark.*;
 
 public class LeWebserver {
 	public static final String PUB_DIR = System.getProperty("user.dir") + "/src/main/webapp/public/";
@@ -93,7 +98,30 @@ public class LeWebserver {
 	        	if (h == null || h.isEmpty()) origin = user.getHouseholds().get(0);
 	        	else origin = user.getHouseholds().get(Integer.parseInt(h));
 	        	List<Carpool> sorted = CarpoolSorter.sort(origin, 
-	        	        ContextCache.getHouseholds()).subList(0, 50);
+	        	        ContextCache.getHouseholds()).subList(1, 20);
+	        	
+	        	Set<String> peopleToRequest = new HashSet<>();
+	        	sorted.stream().forEach(x -> {
+	        	    peopleToRequest.addAll(x.household
+	        	            .getResidents()
+	        	            .stream()
+	        	            .map(UserContext::getId)
+	        	            .collect(Collectors.toList()));
+	        	});
+	        	List<CatlinPerson> catlinPeople = CatlinApi
+	        	        .getPeople(peopleToRequest
+	        	                .toArray(new String[peopleToRequest.size()]));
+	        	
+	        	sorted.stream().forEach(x -> {
+	        	    x.household.getResidents().forEach(y -> {
+	        	        if (y instanceof CatlinUserContext) {
+	        	            ContextCache.addUser(y);
+	        	            CatlinPerson catlinPerson = catlinPeople.stream().filter(z -> z.id.equals(y.getId())).findFirst().get();
+	        	            ((CatlinUserContext) y).requestPersonUpdate(catlinPerson);
+	        	        }
+	        	    });
+	        	});
+	        	
 	        	if (h == null || h.isEmpty()) context.put("h", 0);
 	        	else context.put("h", Integer.parseInt(h));
 	        	context.put("user", user);
