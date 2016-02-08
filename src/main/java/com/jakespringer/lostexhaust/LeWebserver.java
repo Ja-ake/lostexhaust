@@ -117,6 +117,7 @@ public class LeWebserver {
 	        	    x.household.getResidents().forEach(y -> {
 	        	        if (y instanceof CatlinUserContext) {
 	        	            ContextCache.addUser(y);
+	        	            y.invalidate();
 	        	            CatlinPerson catlinPerson = catlinPeople.stream().filter(z -> z.id.equals(y.getId())).findFirst().get();
 	        	            ((CatlinUserContext) y).requestPersonUpdate(catlinPerson);
 	        	        }
@@ -138,6 +139,7 @@ public class LeWebserver {
 	        if (userSession != null) {
 	            Map<String, Object> context = new HashMap<>();
 	        	UserContext user = userSession.getContext();
+	        	user.invalidate();
 		        HouseholdContext household;
 		    	String h = req.queryParams("h");
 		    	if (h == null || h.isEmpty()) household = user.getHouseholds().get(0);
@@ -160,6 +162,7 @@ public class LeWebserver {
 	        if (userSession != null) {
 	            Map<String, Object> context = new HashMap<>();
 	            UserContext user = userSession.getContext();
+	            user.invalidate();
 	            String h = req.queryParams("h");
 	            HouseholdContext household;
 	            if (h == null || h.isEmpty()) household = user.getHouseholds().get(0);
@@ -180,6 +183,7 @@ public class LeWebserver {
 	        if (userSession != null) {
 	        	Map<String, Object> context = new HashMap<>();
 	            UserContext user = userSession.getContext();
+	            user.invalidate();
 	            context.put("user", user);
 	            return new ModelAndView(context, PUB_DIR + "profile.peb");
 	        } else {
@@ -192,6 +196,7 @@ public class LeWebserver {
             UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
 	        if (userSession != null) {
 	            UserContext user = userSession.getContext();
+	            user.invalidate();
 	            String p = req.queryParams("p");
 	            context.put("user", user);
 	            context.put("person", UserContextFactory.get(p));
