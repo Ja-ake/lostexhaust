@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.extensions.compactnotation;
 
@@ -37,11 +37,9 @@ import org.yaml.snakeyaml.nodes.SequenceNode;
  * Construct a custom Java instance out of a compact object notation format.
  */
 public class CompactConstructor extends Constructor {
-    private static final Pattern GUESS_COMPACT = Pattern
-            .compile("\\p{Alpha}.*\\s*\\((?:,?\\s*(?:(?:\\w*)|(?:\\p{Alpha}\\w*\\s*=.+))\\s*)+\\)");
+    private static final Pattern GUESS_COMPACT = Pattern.compile("\\p{Alpha}.*\\s*\\((?:,?\\s*(?:(?:\\w*)|(?:\\p{Alpha}\\w*\\s*=.+))\\s*)+\\)");
     private static final Pattern FIRST_PATTERN = Pattern.compile("(\\p{Alpha}.*)(\\s*)\\((.*?)\\)");
-    private static final Pattern PROPERTY_NAME_PATTERN = Pattern
-            .compile("\\s*(\\p{Alpha}\\w*)\\s*=(.+)");
+    private static final Pattern PROPERTY_NAME_PATTERN = Pattern.compile("\\s*(\\p{Alpha}\\w*)\\s*=(.+)");
     private Construct compactConstruct;
 
     protected Object constructCompactFormat(ScalarNode node, CompactData data) {
@@ -78,8 +76,7 @@ public class CompactConstructor extends Constructor {
             try {
                 property.set(bean, entry.getValue());
             } catch (IllegalArgumentException e) {
-                throw new YAMLException("Cannot set property='" + key + "' with value='"
-                        + data.get(key) + "' (" + data.get(key).getClass() + ") in " + bean);
+                throw new YAMLException("Cannot set property='" + key + "' with value='" + data.get(key) + "' (" + data.get(key).getClass() + ") in " + bean);
             }
         }
     }
@@ -200,8 +197,7 @@ public class CompactConstructor extends Constructor {
 
     protected void applySequence(Object bean, List<?> value) {
         try {
-            Property property = getPropertyUtils().getProperty(bean.getClass(),
-                    getSequencePropertyName(bean.getClass()));
+            Property property = getPropertyUtils().getProperty(bean.getClass(), getSequencePropertyName(bean.getClass()));
             property.set(bean, value);
         } catch (Exception e) {
             throw new YAMLException(e);
@@ -225,10 +221,7 @@ public class CompactConstructor extends Constructor {
         if (properties.size() == 0) {
             throw new YAMLException("No list property found in " + bean);
         } else if (properties.size() > 1) {
-            throw new YAMLException(
-                    "Many list properties found in "
-                            + bean
-                            + "; Please override getSequencePropertyName() to specify which property to use.");
+            throw new YAMLException("Many list properties found in " + bean + "; Please override getSequencePropertyName() to specify which property to use.");
         }
         return properties.iterator().next().getName();
     }

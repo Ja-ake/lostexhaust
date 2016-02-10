@@ -11,7 +11,7 @@ public class HouseholdContextFactory {
                 return household;
             }
         }
-        
+
         return new CatlinHouseholdContext(id);
     }
 }

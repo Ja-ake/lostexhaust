@@ -17,15 +17,11 @@ import com.jakespringer.lostexhaust.util.Timestamp;
 public class CatlinSessionService implements SessionService {
 
     private List<UserSession> sessions = new ArrayList<>();
-    
+
     @Override
     public UserSession getSession(String cookie, String ip) {
         CatlinCrypto.Key key = CatlinCrypto.getMessageFromString(cookie);
-        if (key == null
-        		|| !key.ip.equals(ip)
-        		|| !new Timestamp(key.timestamp).validate(Timestamp.currentTime(), 
-                        LeService.getValidityDuration())
-        		) {
+        if (key == null || !key.ip.equals(ip) || !new Timestamp(key.timestamp).validate(Timestamp.currentTime(), LeService.getValidityDuration())) {
             return null;
         } else {
             // prune sessions
@@ -34,27 +30,25 @@ public class CatlinSessionService implements SessionService {
             // first, check the active sessions
             Optional<UserSession> possibleSession = sessions.stream().filter(x -> {
                 try {
-                    return x.isStillValid() 
-                        && x.getIp().equals(ip)
-                        && x.getContext().getId().equals(key.id);
+                    return x.isStillValid() && x.getIp().equals(ip) && x.getContext().getId().equals(key.id);
                 } catch (SessionExpiredException e) {
                     // should never happen
                     return false;
                 }
             }).findFirst();
-                        
-            if (possibleSession.isPresent()) return possibleSession.get();
-            
+
+            if (possibleSession.isPresent())
+                return possibleSession.get();
+
             // second, check the user cache
-            Optional<UserContext> possibleContext = ContextCache.getUsers().stream().filter(x -> 
-                    x.getId().equals(key.id)).findFirst();
-            
+            Optional<UserContext> possibleContext = ContextCache.getUsers().stream().filter(x -> x.getId().equals(key.id)).findFirst();
+
             if (possibleContext.isPresent()) {
                 UserSession newSession = new UserSession(possibleContext.get(), ip, new Timestamp(key.timestamp));
                 sessions.add(newSession);
                 return newSession;
             }
-            
+
             // third, check sql
             try {
                 if (CatlinSql.inst.verifyUser(key.id)) {
@@ -65,7 +59,7 @@ public class CatlinSessionService implements SessionService {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-                        
+
             // fourth, give up
             return null;
         }

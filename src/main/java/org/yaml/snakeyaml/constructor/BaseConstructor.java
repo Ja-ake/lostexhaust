@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.constructor;
 
@@ -43,8 +43,7 @@ public abstract class BaseConstructor {
      * It maps the node kind to the the Construct implementation. When the
      * runtime class is known then the implicit tag is ignored.
      */
-    protected final Map<NodeId, Construct> yamlClassConstructors = new EnumMap<NodeId, Construct>(
-            NodeId.class);
+    protected final Map<NodeId, Construct> yamlClassConstructors = new EnumMap<NodeId, Construct>(NodeId.class);
     /**
      * It maps the (explicit or implicit) tag to the Construct implementation.
      * It is used: <br/>
@@ -173,8 +172,7 @@ public abstract class BaseConstructor {
             return constructedObjects.get(node);
         }
         if (recursiveObjects.contains(node)) {
-            throw new ConstructorException(null, null, "found unconstructable recursive node",
-                    node.getStartMark());
+            throw new ConstructorException(null, null, "found unconstructable recursive node", node.getStartMark());
         }
         recursiveObjects.add(node);
         Construct constructor = getConstructor(node);
@@ -364,9 +362,7 @@ public abstract class BaseConstructor {
                 try {
                     key.hashCode();// check circular dependencies
                 } catch (Exception e) {
-                    throw new ConstructorException("while constructing a mapping",
-                            node.getStartMark(), "found unacceptable key " + key, tuple
-                                    .getKeyNode().getStartMark(), e);
+                    throw new ConstructorException("while constructing a mapping", node.getStartMark(), "found unacceptable key " + key, tuple.getKeyNode().getStartMark(), e);
                 }
             }
             Object value = constructObject(valueNode);
@@ -377,9 +373,7 @@ public abstract class BaseConstructor {
                  * initialization compared to clean just created one. And map of
                  * course does not observe key hashCode changes.
                  */
-                maps2fill.add(0,
-                        new RecursiveTuple<Map<Object, Object>, RecursiveTuple<Object, Object>>(
-                                mapping, new RecursiveTuple<Object, Object>(key, value)));
+                maps2fill.add(0, new RecursiveTuple<Map<Object, Object>, RecursiveTuple<Object, Object>>(mapping, new RecursiveTuple<Object, Object>(key, value)));
             } else {
                 mapping.put(key, value);
             }
@@ -395,8 +389,7 @@ public abstract class BaseConstructor {
                 try {
                     key.hashCode();// check circular dependencies
                 } catch (Exception e) {
-                    throw new ConstructorException("while constructing a Set", node.getStartMark(),
-                            "found unacceptable key " + key, tuple.getKeyNode().getStartMark(), e);
+                    throw new ConstructorException("while constructing a Set", node.getStartMark(), "found unacceptable key " + key, tuple.getKeyNode().getStartMark(), e);
                 }
             }
             if (keyNode.isTwoStepsConstruction()) {

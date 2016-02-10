@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.representer;
 
@@ -147,8 +147,7 @@ class SafeRepresenter extends BaseRepresenter {
         public Node representData(Object data) {
             Tag tag;
             String value;
-            if (data instanceof Byte || data instanceof Short || data instanceof Integer
-                    || data instanceof Long || data instanceof BigInteger) {
+            if (data instanceof Byte || data instanceof Short || data instanceof Integer || data instanceof Long || data instanceof BigInteger) {
                 tag = Tag.INT;
                 value = data.toString();
             } else {
@@ -179,8 +178,7 @@ class SafeRepresenter extends BaseRepresenter {
         @SuppressWarnings("unchecked")
         public Node representData(Object data) {
             Iterator<Object> iter = (Iterator<Object>) data;
-            return representSequence(getTag(data.getClass(), Tag.SEQ), new IteratorWrapper(iter),
-                    null);
+            return representSequence(getTag(data.getClass(), Tag.SEQ), new IteratorWrapper(iter), null);
         }
     }
 
@@ -302,8 +300,7 @@ class SafeRepresenter extends BaseRepresenter {
     protected class RepresentMap implements Represent {
         @SuppressWarnings("unchecked")
         public Node representData(Object data) {
-            return representMapping(getTag(data.getClass(), Tag.MAP), (Map<Object, Object>) data,
-                    null);
+            return representMapping(getTag(data.getClass(), Tag.MAP), (Map<Object, Object>) data, null);
         }
     }
 
@@ -326,8 +323,7 @@ class SafeRepresenter extends BaseRepresenter {
             if (data instanceof Calendar) {
                 calendar = (Calendar) data;
             } else {
-                calendar = Calendar.getInstance(getTimeZone() == null ? TimeZone.getTimeZone("UTC")
-                        : timeZone);
+                calendar = Calendar.getInstance(getTimeZone() == null ? TimeZone.getTimeZone("UTC") : timeZone);
                 calendar.setTime((Date) data);
             }
             int years = calendar.get(Calendar.YEAR);
@@ -381,15 +377,12 @@ class SafeRepresenter extends BaseRepresenter {
                 buffer.append("Z");
             } else {
                 // Get the Offset from GMT taking DST into account
-                int gmtOffset = calendar.getTimeZone().getOffset(calendar.get(Calendar.ERA),
-                        calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.DAY_OF_WEEK),
-                        calendar.get(Calendar.MILLISECOND));
+                int gmtOffset = calendar.getTimeZone().getOffset(calendar.get(Calendar.ERA), calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+                        calendar.get(Calendar.DAY_OF_WEEK), calendar.get(Calendar.MILLISECOND));
                 int minutesOffset = gmtOffset / (60 * 1000);
                 int hoursOffset = minutesOffset / 60;
                 int partOfHour = minutesOffset % 60;
-                buffer.append((hoursOffset > 0 ? "+" : "") + hoursOffset + ":"
-                        + (partOfHour < 10 ? "0" + partOfHour : partOfHour));
+                buffer.append((hoursOffset > 0 ? "+" : "") + hoursOffset + ":" + (partOfHour < 10 ? "0" + partOfHour : partOfHour));
             }
             return representScalar(getTag(data.getClass(), Tag.TIMESTAMP), buffer.toString(), null);
         }

@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml;
 
@@ -35,8 +35,7 @@ public class DumperOptions {
      * @see <a href="http://yaml.org/spec/1.1/#id858081">2.3. Scalars</a>
      */
     public enum ScalarStyle {
-        DOUBLE_QUOTED(Character.valueOf('"')), SINGLE_QUOTED(Character.valueOf('\'')), LITERAL(
-                Character.valueOf('|')), FOLDED(Character.valueOf('>')), PLAIN(null);
+        DOUBLE_QUOTED(Character.valueOf('"')), SINGLE_QUOTED(Character.valueOf('\'')), LITERAL(Character.valueOf('|')), FOLDED(Character.valueOf('>')), PLAIN(null);
         private Character styleChar;
 
         private ScalarStyle(Character style) {
@@ -143,8 +142,13 @@ public class DumperOptions {
             this.version = version;
         }
 
-        public int major() { return version[0]; }
-        public int minor() { return version[1]; }
+        public int major() {
+            return version[0];
+        }
+
+        public int minor() {
+            return version[1];
+        }
 
         public String getRepresentation() {
             return version[0] + "." + version[1];
@@ -179,10 +183,10 @@ public class DumperOptions {
     }
 
     /**
-     * Specify whether to emit non-ASCII printable Unicode characters.
-     * The default value is true.
-     * When set to false then printable non-ASCII characters (Cyrillic, Chinese etc)
-     * will be not printed but escaped (to support ASCII terminals)
+     * Specify whether to emit non-ASCII printable Unicode characters. The
+     * default value is true. When set to false then printable non-ASCII
+     * characters (Cyrillic, Chinese etc) will be not printed but escaped (to
+     * support ASCII terminals)
      *
      * @param allowUnicode
      *            if allowUnicode is false then all non-ASCII characters are
@@ -278,8 +282,8 @@ public class DumperOptions {
     }
 
     /**
-     * Specify whether to split lines exceeding preferred width for
-     * scalars. The default is true.
+     * Specify whether to split lines exceeding preferred width for scalars. The
+     * default is true.
      *
      * @param splitLines
      *            whether to split lines exceeding preferred width for scalars.
@@ -377,7 +381,6 @@ public class DumperOptions {
     public void setTimeZone(TimeZone timeZone) {
         this.timeZone = timeZone;
     }
-
 
     public AnchorGenerator getAnchorGenerator() {
         return anchorGenerator;

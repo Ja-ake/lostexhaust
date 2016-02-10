@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml;
 
@@ -148,8 +148,7 @@ public class Yaml {
      * @param resolver
      *            Resolver to detect implicit type
      */
-    public Yaml(BaseConstructor constructor, Representer representer, DumperOptions dumperOptions,
-            Resolver resolver) {
+    public Yaml(BaseConstructor constructor, Representer representer, DumperOptions dumperOptions, Resolver resolver) {
         if (!constructor.isExplicitPropertyUtils()) {
             constructor.setPropertyUtils(representer.getPropertyUtils());
         } else if (!representer.isExplicitPropertyUtils()) {
@@ -158,8 +157,7 @@ public class Yaml {
         this.constructor = constructor;
         representer.setDefaultFlowStyle(dumperOptions.getDefaultFlowStyle());
         representer.setDefaultScalarStyle(dumperOptions.getDefaultScalarStyle());
-        representer.getPropertyUtils().setAllowReadOnlyProperties(
-                dumperOptions.isAllowReadOnlyProperties());
+        representer.getPropertyUtils().setAllowReadOnlyProperties(dumperOptions.isAllowReadOnlyProperties());
         representer.setTimeZone(dumperOptions.getTimeZone());
         this.representer = representer;
         this.dumperOptions = dumperOptions;
@@ -233,8 +231,7 @@ public class Yaml {
     }
 
     private void dumpAll(Iterator<? extends Object> data, Writer output, Tag rootTag) {
-        Serializer serializer = new Serializer(new Emitter(output, dumperOptions), resolver,
-                dumperOptions, rootTag);
+        Serializer serializer = new Serializer(new Emitter(output, dumperOptions), resolver, dumperOptions, rootTag);
         try {
             serializer.open();
             while (data.hasNext()) {

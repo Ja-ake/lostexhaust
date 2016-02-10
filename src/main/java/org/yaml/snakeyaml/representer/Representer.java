@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.representer;
 
@@ -77,10 +77,8 @@ public class Representer extends SafeRepresenter {
         boolean bestStyle = true;
         for (Property property : properties) {
             Object memberValue = property.get(javaBean);
-            Tag customPropertyTag = memberValue == null ? null : classTags.get(memberValue
-                    .getClass());
-            NodeTuple tuple = representJavaBeanProperty(javaBean, property, memberValue,
-                    customPropertyTag);
+            Tag customPropertyTag = memberValue == null ? null : classTags.get(memberValue.getClass());
+            NodeTuple tuple = representJavaBeanProperty(javaBean, property, memberValue, customPropertyTag);
             if (tuple == null) {
                 continue;
             }
@@ -115,8 +113,7 @@ public class Representer extends SafeRepresenter {
      * @return NodeTuple to be used in a MappingNode. Return null to skip the
      *         property
      */
-    protected NodeTuple representJavaBeanProperty(Object javaBean, Property property,
-            Object propertyValue, Tag customTag) {
+    protected NodeTuple representJavaBeanProperty(Object javaBean, Property property, Object propertyValue, Tag customTag) {
         ScalarNode nodeKey = (ScalarNode) representData(property.getName());
         // the first occurrence of the node must keep the tag
         boolean hasAlias = this.representedObjects.containsKey(propertyValue);
@@ -237,8 +234,7 @@ public class Representer extends SafeRepresenter {
      *            - JavaBean to inspect the properties
      * @return properties to serialise
      */
-    protected Set<Property> getProperties(Class<? extends Object> type)
-            throws IntrospectionException {
+    protected Set<Property> getProperties(Class<? extends Object> type) throws IntrospectionException {
         return getPropertyUtils().getProperties(type);
     }
 }

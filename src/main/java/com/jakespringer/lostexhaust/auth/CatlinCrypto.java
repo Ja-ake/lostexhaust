@@ -7,10 +7,8 @@ import java.security.KeyFactory;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.regex.Pattern;
-
 import javax.crypto.Cipher;
 import javax.xml.bind.DatatypeConverter;
-
 import com.jakespringer.lostexhaust.LeWebserver;
 
 public class CatlinCrypto {

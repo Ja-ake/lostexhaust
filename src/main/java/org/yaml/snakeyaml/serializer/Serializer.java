@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.serializer;
 
@@ -101,8 +101,7 @@ public final class Serializer {
         } else if (closed) {
             throw new SerializerException("serializer is closed");
         }
-        this.emitter.emit(new DocumentStartEvent(null, null, this.explicitStart, this.useVersion,
-                useTags));
+        this.emitter.emit(new DocumentStartEvent(null, null, this.explicitStart, this.useVersion, useTags));
         anchorNode(node);
         if (explicitRoot != null) {
             node.setTag(explicitRoot);
@@ -161,18 +160,14 @@ public final class Serializer {
                 ScalarNode scalarNode = (ScalarNode) node;
                 Tag detectedTag = this.resolver.resolve(NodeId.scalar, scalarNode.getValue(), true);
                 Tag defaultTag = this.resolver.resolve(NodeId.scalar, scalarNode.getValue(), false);
-                ImplicitTuple tuple = new ImplicitTuple(node.getTag().equals(detectedTag), node
-                        .getTag().equals(defaultTag));
-                ScalarEvent event = new ScalarEvent(tAlias, node.getTag().getValue(), tuple,
-                        scalarNode.getValue(), null, null, scalarNode.getStyle());
+                ImplicitTuple tuple = new ImplicitTuple(node.getTag().equals(detectedTag), node.getTag().equals(defaultTag));
+                ScalarEvent event = new ScalarEvent(tAlias, node.getTag().getValue(), tuple, scalarNode.getValue(), null, null, scalarNode.getStyle());
                 this.emitter.emit(event);
                 break;
             case sequence:
                 SequenceNode seqNode = (SequenceNode) node;
-                boolean implicitS = node.getTag().equals(this.resolver.resolve(NodeId.sequence,
-                        null, true));
-                this.emitter.emit(new SequenceStartEvent(tAlias, node.getTag().getValue(),
-                        implicitS, null, null, seqNode.getFlowStyle()));
+                boolean implicitS = node.getTag().equals(this.resolver.resolve(NodeId.sequence, null, true));
+                this.emitter.emit(new SequenceStartEvent(tAlias, node.getTag().getValue(), implicitS, null, null, seqNode.getFlowStyle()));
                 List<Node> list = seqNode.getValue();
                 for (Node item : list) {
                     serializeNode(item, node);
@@ -182,8 +177,7 @@ public final class Serializer {
             default:// instance of MappingNode
                 Tag implicitTag = this.resolver.resolve(NodeId.mapping, null, true);
                 boolean implicitM = node.getTag().equals(implicitTag);
-                this.emitter.emit(new MappingStartEvent(tAlias, node.getTag().getValue(),
-                        implicitM, null, null, ((CollectionNode) node).getFlowStyle()));
+                this.emitter.emit(new MappingStartEvent(tAlias, node.getTag().getValue(), implicitM, null, null, ((CollectionNode) node).getFlowStyle()));
                 MappingNode mnode = (MappingNode) node;
                 List<NodeTuple> map = mnode.getValue();
                 for (NodeTuple row : map) {

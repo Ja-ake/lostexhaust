@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.emitter;
 
@@ -84,10 +84,12 @@ public final class Emitter implements Emitable {
     }
 
     private final static Map<String, String> DEFAULT_TAG_PREFIXES = new LinkedHashMap<String, String>();
+
     static {
         DEFAULT_TAG_PREFIXES.put("!", "!");
         DEFAULT_TAG_PREFIXES.put(Tag.PREFIX, "!!");
     }
+
     // The stream should have the methods `write` and possibly `flush`.
     private final Writer stream;
 
@@ -326,10 +328,7 @@ public final class Emitter implements Emitable {
                         writeTagDirective(handleText, prefixText);
                     }
                 }
-                boolean implicit = first && !ev.getExplicit() && !canonical
-                        && ev.getVersion() == null
-                        && (ev.getTags() == null || ev.getTags().isEmpty())
-                        && !checkEmptyDocument();
+                boolean implicit = first && !ev.getExplicit() && !canonical && ev.getVersion() == null && (ev.getTags() == null || ev.getTags().isEmpty()) && !checkEmptyDocument();
                 if (!implicit) {
                     writeIndent();
                     writeIndicator("---", true, false, false);
@@ -389,15 +388,13 @@ public final class Emitter implements Emitable {
             if (event instanceof ScalarEvent) {
                 expectScalar();
             } else if (event instanceof SequenceStartEvent) {
-                if (flowLevel != 0 || canonical || ((SequenceStartEvent) event).getFlowStyle()
-                        || checkEmptySequence()) {
+                if (flowLevel != 0 || canonical || ((SequenceStartEvent) event).getFlowStyle() || checkEmptySequence()) {
                     expectFlowSequence();
                 } else {
                     expectBlockSequence();
                 }
             } else {// MappingStartEvent
-                if (flowLevel != 0 || canonical || ((MappingStartEvent) event).getFlowStyle()
-                        || checkEmptyMapping()) {
+                if (flowLevel != 0 || canonical || ((MappingStartEvent) event).getFlowStyle() || checkEmptyMapping()) {
                     expectFlowMapping();
                 } else {
                     expectBlockMapping();
@@ -667,8 +664,7 @@ public final class Emitter implements Emitable {
         Event event = events.peek();
         if (event instanceof ScalarEvent) {
             ScalarEvent e = (ScalarEvent) event;
-            return e.getAnchor() == null && e.getTag() == null && e.getImplicit() != null && e
-                    .getValue().length() == 0;
+            return e.getAnchor() == null && e.getTag() == null && e.getImplicit() != null && e.getValue().length() == 0;
         }
         return false;
     }
@@ -699,9 +695,7 @@ public final class Emitter implements Emitable {
             }
             length += analysis.scalar.length();
         }
-        return length < 128 && (event instanceof AliasEvent
-                || (event instanceof ScalarEvent && !analysis.empty && !analysis.multiline)
-                || checkEmptySequence() || checkEmptyMapping());
+        return length < 128 && (event instanceof AliasEvent || (event instanceof ScalarEvent && !analysis.empty && !analysis.multiline) || checkEmptySequence() || checkEmptyMapping());
     }
 
     // Anchor, Tag, and Scalar processors.
@@ -727,9 +721,7 @@ public final class Emitter implements Emitable {
             if (style == null) {
                 style = chooseScalarStyle();
             }
-            if ((!canonical || tag == null) && ((style == null && ev.getImplicit()
-                    .canOmitTagInPlainScalar()) || (style != null && ev.getImplicit()
-                    .canOmitTagInNonPlainScalar()))) {
+            if ((!canonical || tag == null) && ((style == null && ev.getImplicit().canOmitTagInPlainScalar()) || (style != null && ev.getImplicit().canOmitTagInNonPlainScalar()))) {
                 preparedTag = null;
                 return;
             }
@@ -764,8 +756,7 @@ public final class Emitter implements Emitable {
             return '"';
         }
         if (ev.getStyle() == null && ev.getImplicit().canOmitTagInPlainScalar()) {
-            if (!(simpleKeyContext && (analysis.empty || analysis.multiline))
-                    && ((flowLevel != 0 && analysis.allowFlowPlain) || (flowLevel == 0 && analysis.allowBlockPlain))) {
+            if (!(simpleKeyContext && (analysis.empty || analysis.multiline)) && ((flowLevel != 0 && analysis.allowFlowPlain) || (flowLevel == 0 && analysis.allowBlockPlain))) {
                 return null;
             }
         }
@@ -973,8 +964,7 @@ public final class Emitter implements Emitable {
                 lineBreaks = true;
             }
             if (!(ch == '\n' || ('\u0020' <= ch && ch <= '\u007E'))) {
-                if ((ch == '\u0085' || ('\u00A0' <= ch && ch <= '\uD7FF') || ('\uE000' <= ch && ch <= '\uFFFD'))
-                        && (ch != '\uFEFF')) {
+                if ((ch == '\u0085' || ('\u00A0' <= ch && ch <= '\uD7FF') || ('\uE000' <= ch && ch <= '\uFFFD')) && (ch != '\uFEFF')) {
                     // unicode is used
                     if (!this.allowUnicode) {
                         specialCharacters = true;
@@ -1016,8 +1006,7 @@ public final class Emitter implements Emitable {
             // Prepare for the next character.
             index++;
             preceededByWhitespace = Constant.NULL_BL_T.has(ch) || isLineBreak;
-            followedByWhitespace = index + 1 >= scalar.length()
-                    || (Constant.NULL_BL_T.has(scalar.charAt(index + 1))) || isLineBreak;
+            followedByWhitespace = index + 1 >= scalar.length() || (Constant.NULL_BL_T.has(scalar.charAt(index + 1))) || isLineBreak;
         }
         // Let's decide what styles are allowed.
         boolean allowFlowPlain = true;
@@ -1056,8 +1045,7 @@ public final class Emitter implements Emitable {
             allowBlockPlain = false;
         }
 
-        return new ScalarAnalysis(scalar, false, lineBreaks, allowFlowPlain, allowBlockPlain,
-                allowSingleQuoted, allowBlock);
+        return new ScalarAnalysis(scalar, false, lineBreaks, allowFlowPlain, allowBlockPlain, allowSingleQuoted, allowBlock);
     }
 
     // Writers.
@@ -1074,8 +1062,7 @@ public final class Emitter implements Emitable {
         flushStream();
     }
 
-    void writeIndicator(String indicator, boolean needWhitespace, boolean whitespace,
-            boolean indentation) throws IOException {
+    void writeIndicator(String indicator, boolean needWhitespace, boolean whitespace, boolean indentation) throws IOException {
         if (!this.whitespace && needWhitespace) {
             this.column++;
             stream.write(SPACE);
@@ -1151,8 +1138,7 @@ public final class Emitter implements Emitable {
             }
             if (spaces) {
                 if (ch == 0 || ch != ' ') {
-                    if (start + 1 == end && this.column > this.bestWidth && split && start != 0
-                            && end != text.length()) {
+                    if (start + 1 == end && this.column > this.bestWidth && split && start != 0 && end != text.length()) {
                         writeIndent();
                     } else {
                         int len = end - start;
@@ -1210,8 +1196,7 @@ public final class Emitter implements Emitable {
             if (end < text.length()) {
                 ch = text.charAt(end);
             }
-            if (ch == null || "\"\\\u0085\u2028\u2029\uFEFF".indexOf(ch) != -1
-                    || !('\u0020' <= ch && ch <= '\u007E')) {
+            if (ch == null || "\"\\\u0085\u2028\u2029\uFEFF".indexOf(ch) != -1 || !('\u0020' <= ch && ch <= '\u007E')) {
                 if (start < end) {
                     int len = end - start;
                     this.column += len;
@@ -1249,8 +1234,7 @@ public final class Emitter implements Emitable {
                     start = end + 1;
                 }
             }
-            if ((0 < end && end < (text.length() - 1)) && (ch == ' ' || start >= end)
-                    && (this.column + (end - start)) > this.bestWidth && split) {
+            if ((0 < end && end < (text.length() - 1)) && (ch == ' ' || start >= end) && (this.column + (end - start)) > this.bestWidth && split) {
                 String data;
                 if (start >= end) {
                     data = "\\";

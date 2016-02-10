@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.composer;
 
@@ -40,8 +40,8 @@ import org.yaml.snakeyaml.resolver.Resolver;
 /**
  * Creates a node graph from parser events.
  * <p>
- * Corresponds to the 'Compose' step as described in chapter 3.1 of the <a
- * href="http://yaml.org/spec/1.1/">YAML Specification</a>.
+ * Corresponds to the 'Compose' step as described in chapter 3.1 of the
+ * <a href="http://yaml.org/spec/1.1/">YAML Specification</a>.
  * </p>
  */
 public class Composer {
@@ -106,8 +106,7 @@ public class Composer {
         // Ensure that the stream contains no more documents.
         if (!parser.checkEvent(Event.ID.StreamEnd)) {
             Event event = parser.getEvent();
-            throw new ComposerException("expected a single document in the stream",
-                    document.getStartMark(), "but found another document", event.getStartMark());
+            throw new ComposerException("expected a single document in the stream", document.getStartMark(), "but found another document", event.getStartMark());
         }
         // Drop the STREAM-END event.
         parser.getEvent();
@@ -132,8 +131,7 @@ public class Composer {
             AliasEvent event = (AliasEvent) parser.getEvent();
             String anchor = event.getAnchor();
             if (!anchors.containsKey(anchor)) {
-                throw new ComposerException(null, null, "found undefined alias " + anchor,
-                        event.getStartMark());
+                throw new ComposerException(null, null, "found undefined alias " + anchor, event.getStartMark());
             }
             Node result = anchors.get(anchor);
             if (recursiveNodes.remove(result)) {
@@ -163,14 +161,12 @@ public class Composer {
         boolean resolved = false;
         Tag nodeTag;
         if (tag == null || tag.equals("!")) {
-            nodeTag = resolver.resolve(NodeId.scalar, ev.getValue(), ev.getImplicit()
-                    .canOmitTagInPlainScalar());
+            nodeTag = resolver.resolve(NodeId.scalar, ev.getValue(), ev.getImplicit().canOmitTagInPlainScalar());
             resolved = true;
         } else {
             nodeTag = new Tag(tag);
         }
-        Node node = new ScalarNode(nodeTag, resolved, ev.getValue(), ev.getStartMark(),
-                ev.getEndMark(), ev.getStyle());
+        Node node = new ScalarNode(nodeTag, resolved, ev.getValue(), ev.getStartMark(), ev.getEndMark(), ev.getStyle());
         if (anchor != null) {
             anchors.put(anchor, node);
         }
@@ -189,8 +185,7 @@ public class Composer {
             nodeTag = new Tag(tag);
         }
         final ArrayList<Node> children = new ArrayList<Node>();
-        SequenceNode node = new SequenceNode(nodeTag, resolved, children,
-                startEvent.getStartMark(), null, startEvent.getFlowStyle());
+        SequenceNode node = new SequenceNode(nodeTag, resolved, children, startEvent.getStartMark(), null, startEvent.getFlowStyle());
         if (anchor != null) {
             anchors.put(anchor, node);
         }
@@ -215,8 +210,7 @@ public class Composer {
         }
 
         final List<NodeTuple> children = new ArrayList<NodeTuple>();
-        MappingNode node = new MappingNode(nodeTag, resolved, children, startEvent.getStartMark(),
-                null, startEvent.getFlowStyle());
+        MappingNode node = new MappingNode(nodeTag, resolved, children, startEvent.getStartMark(), null, startEvent.getFlowStyle());
         if (anchor != null) {
             anchors.put(anchor, node);
         }

@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.reader;
 
@@ -28,8 +28,7 @@ import org.yaml.snakeyaml.scanner.Constant;
  * Reader: checks if characters are in allowed range, adds '\0' to the end.
  */
 public class StreamReader {
-    public final static Pattern NON_PRINTABLE = Pattern
-            .compile("[^\t\n\r\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD]");
+    public final static Pattern NON_PRINTABLE = Pattern.compile("[^\t\n\r\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD]");
     private String name;
     private final Reader stream;
     private int pointer = 0;
@@ -63,21 +62,20 @@ public class StreamReader {
         Matcher em = NON_PRINTABLE.matcher(data);
         if (em.find()) {
             int position = this.index + this.buffer.length() - this.pointer + em.start();
-            throw new ReaderException(name, position, em.group().charAt(0),
-                    "special characters are not allowed");
+            throw new ReaderException(name, position, em.group().charAt(0), "special characters are not allowed");
         }
     }
 
     /**
      * Checks <code>chars</chars> for the non-printable characters.
      * 
-     * @param chars
+     * &#64;param chars
      *            the array where to search.
-     * @param begin
+     * &#64;param begin
      *            the beginning index, inclusive.
-     * @param end
+     * &#64;param end
      *            the ending index, exclusive.
-     * @throws ReaderException
+     * &#64;throws ReaderException
      *             if <code>chars</code> contains non-printable character(s).
      */
     void checkPrintable(final char[] chars, final int begin, final int end) {
@@ -94,9 +92,7 @@ public class StreamReader {
     }
 
     public static boolean isPrintable(final char c) {
-        return (c >= '\u0020' && c <= '\u007E') || c == '\n' || c == '\r' || c == '\t'
-                || c == '\u0085' || (c >= '\u00A0' && c <= '\uD7FF')
-                || (c >= '\uE000' && c <= '\uFFFD');
+        return (c >= '\u0020' && c <= '\u007E') || c == '\n' || c == '\r' || c == '\t' || c == '\u0085' || (c >= '\u00A0' && c <= '\uD7FF') || (c >= '\uE000' && c <= '\uFFFD');
     }
 
     public Mark getMark() {
@@ -189,8 +185,7 @@ public class StreamReader {
                      * unnecessary operations in appends.
                      */
                     checkPrintable(data, 0, converted);
-                    this.buffer = new StringBuilder(buffer.length() + converted).append(buffer)
-                            .append(data, 0, converted).toString();
+                    this.buffer = new StringBuilder(buffer.length() + converted).append(buffer).append(data, 0, converted).toString();
                 } else {
                     this.eof = true;
                     this.buffer += "\0";

@@ -1,16 +1,17 @@
-/* Copyright (c) 2008 Google Inc.
+/*
+ * Copyright (c) 2008 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package org.yaml.snakeyaml.external.com.google.gdata.util.common.base;
@@ -26,18 +27,18 @@ import com.google.common.escape.CharEscaperBuilder;
  * automatically by the relevant parser.
  * 
  * <p>
- * For example, an XML escaper would convert the literal string
- * {@code "Foo<Bar>"} into {@code "Foo&lt;Bar&gt;"} to prevent {@code "<Bar>"}
- * from being confused with an XML tag. When the resulting XML document is
- * parsed, the parser API will return this text as the original literal string
- * {@code "Foo<Bar>"}.
+ * For example, an XML escaper would convert the literal string {@code 
+ * "Foo<Bar>"} into {@code "Foo&lt;Bar&gt;"} to prevent {@code "<Bar>"} from
+ * being confused with an XML tag. When the resulting XML document is parsed,
+ * the parser API will return this text as the original literal string {@code 
+ * "Foo<Bar>"}.
  * 
  * <p>
  * <b>Note:</b> This class is similar to {@link CharEscaper} but with one very
- * important difference. A CharEscaper can only process Java <a
- * href="http://en.wikipedia.org/wiki/UTF-16">UTF16</a> characters in isolation
- * and may not cope when it encounters surrogate pairs. This class facilitates
- * the correct escaping of all Unicode characters.
+ * important difference. A CharEscaper can only process Java
+ * <a href="http://en.wikipedia.org/wiki/UTF-16">UTF16</a> characters in
+ * isolation and may not cope when it encounters surrogate pairs. This class
+ * facilitates the correct escaping of all Unicode characters.
  * 
  * <p>
  * As there are important reasons, including potential security issues, to
@@ -311,11 +312,9 @@ public abstract class UnicodeEscaper implements Escaper {
                         // so we have to do some extra work first.
                         char c = csq.charAt(index++);
                         if (!Character.isLowSurrogate(c)) {
-                            throw new IllegalArgumentException(
-                                    "Expected low surrogate character but got " + c);
+                            throw new IllegalArgumentException("Expected low surrogate character but got " + c);
                         }
-                        char[] escaped = escape(Character.toCodePoint((char) pendingHighSurrogate,
-                                c));
+                        char[] escaped = escape(Character.toCodePoint((char) pendingHighSurrogate, c));
                         if (escaped != null) {
                             // Emit the escaped character and adjust
                             // unescapedChunkStart to
@@ -377,9 +376,7 @@ public abstract class UnicodeEscaper implements Escaper {
                     // surrogate pair
                     // so we have to do some extra work first.
                     if (!Character.isLowSurrogate(c)) {
-                        throw new IllegalArgumentException(
-                                "Expected low surrogate character but got '" + c + "' with value "
-                                        + (int) c);
+                        throw new IllegalArgumentException("Expected low surrogate character but got '" + c + "' with value " + (int) c);
                     }
                     char[] escaped = escape(Character.toCodePoint((char) pendingHighSurrogate, c));
                     if (escaped != null) {
@@ -394,8 +391,7 @@ public abstract class UnicodeEscaper implements Escaper {
                     pendingHighSurrogate = c;
                 } else {
                     if (Character.isLowSurrogate(c)) {
-                        throw new IllegalArgumentException("Unexpected low surrogate character '"
-                                + c + "' with value " + (int) c);
+                        throw new IllegalArgumentException("Unexpected low surrogate character '" + c + "' with value " + (int) c);
                     }
                     // This is a normal (non surrogate) char.
                     char[] escaped = escape(c);
@@ -471,11 +467,9 @@ public abstract class UnicodeEscaper implements Escaper {
                 if (Character.isLowSurrogate(c2)) {
                     return Character.toCodePoint(c1, c2);
                 }
-                throw new IllegalArgumentException("Expected low surrogate but got char '" + c2
-                        + "' with value " + (int) c2 + " at index " + index);
+                throw new IllegalArgumentException("Expected low surrogate but got char '" + c2 + "' with value " + (int) c2 + " at index " + index);
             } else {
-                throw new IllegalArgumentException("Unexpected low surrogate character '" + c1
-                        + "' with value " + (int) c1 + " at index " + (index - 1));
+                throw new IllegalArgumentException("Unexpected low surrogate character '" + c1 + "' with value " + (int) c1 + " at index " + (index - 1));
             }
         }
         throw new IndexOutOfBoundsException("Index exceeds specified range");

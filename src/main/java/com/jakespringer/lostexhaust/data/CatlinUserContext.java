@@ -17,11 +17,11 @@ public class CatlinUserContext implements UserContext {
     private CatlinPerson personDetails;
     private byte[] profilePicture;
     private List<HouseholdContext> households;
-    
+
     public CatlinUserContext(String _userId) {
         userId = _userId;
     }
-    
+
     @Override
     public String getId() {
         return userId;
@@ -29,103 +29,100 @@ public class CatlinUserContext implements UserContext {
 
     @Override
     public String getFirstname() {
-    	ifNeededUpdateDetails();
+        ifNeededUpdateDetails();
         return personDetails.firstname;
     }
 
     @Override
     public String getLastname() {
-    	ifNeededUpdateDetails();
+        ifNeededUpdateDetails();
         return personDetails.lastname;
     }
 
     @Override
     public List<HouseholdContext> getHouseholds() {
-    	ifNeededUpdateHouseholds();
+        ifNeededUpdateHouseholds();
         return Collections.unmodifiableList(households);
     }
 
     @Override
     public String getAffiliation() {
-    	ifNeededUpdateDetails();
+        ifNeededUpdateDetails();
         return personDetails.affiliation;
     }
 
     @Override
     public String getGradeLevel() {
-    	ifNeededUpdateDetails();
+        ifNeededUpdateDetails();
         return personDetails.gradeLevel;
     }
 
     @Override
     public String getClassYear() {
-    	ifNeededUpdateDetails();
+        ifNeededUpdateDetails();
         return personDetails.classYear;
     }
 
     @Override
     public List<Contact> getContactInfo() {
-    	ifNeededUpdateDetails();
+        ifNeededUpdateDetails();
         return personDetails.contact;
     }
 
     @Override
     public List<Relationship> getRelationships() {
-    	ifNeededUpdateDetails();
-    	return personDetails.relationships;
+        ifNeededUpdateDetails();
+        return personDetails.relationships;
     }
 
     @Override
     public byte[] getProfilePicture() {
-    	ifNeededUpdatePicture();
+        ifNeededUpdatePicture();
         return profilePicture;
     }
 
     @Override
     public void invalidate() {
-    	personDetails = null;
-    	profilePicture = null;
-    	households = null;
+        personDetails = null;
+        profilePicture = null;
+        households = null;
     }
-    
+
     private void ifNeededUpdateHouseholds() {
         if (households == null) {
             try {
-                households = CatlinSql.inst.getHouseholdsFromUser(userId)
-                        .stream()
-                        .map(HouseholdContextFactory::get)
-                        .collect(Collectors.toList());
+                households = CatlinSql.inst.getHouseholdsFromUser(userId).stream().map(HouseholdContextFactory::get).collect(Collectors.toList());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
     }
-    
+
     private void ifNeededUpdateDetails() {
-    	if (personDetails == null) {
-    		try {
-				personDetails = CatlinApi.getPeople(userId).get(0);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-    	}
+        if (personDetails == null) {
+            try {
+                personDetails = CatlinApi.getPeople(userId).get(0);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
-    
+
     private void ifNeededUpdatePicture() {
-    	if (profilePicture == null) {
-    		try {
-    			profilePicture = CatlinApi.getProfilePicture(userId);
-    		} catch (IOException e) {
-    			throw new RuntimeException(e);
-    		}
-    	}
+        if (profilePicture == null) {
+            try {
+                profilePicture = CatlinApi.getProfilePicture(userId);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
-    
+
     public void requestPersonUpdate(CatlinPerson c) {
-        if (personDetails == null) personDetails = c;
+        if (personDetails == null)
+            personDetails = c;
     }
-    
-    
+
     public boolean isParent() {
         return userId.startsWith("IN");
     }

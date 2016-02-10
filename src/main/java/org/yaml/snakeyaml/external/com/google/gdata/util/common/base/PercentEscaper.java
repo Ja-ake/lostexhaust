@@ -1,16 +1,17 @@
-/* Copyright (c) 2008 Google Inc.
+/*
+ * Copyright (c) 2008 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package org.yaml.snakeyaml.external.com.google.gdata.util.common.base;
@@ -21,13 +22,14 @@ package org.yaml.snakeyaml.external.com.google.gdata.util.common.base;
  * unescaped) can be specified on construction.
  * 
  * <p>
- * For details on escaping URIs for use in web pages, see section 2.4 of <a
- * href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>.
+ * For details on escaping URIs for use in web pages, see section 2.4 of
+ * <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>.
  * 
  * <p>
  * In most cases this class should not need to be used directly. If you have no
  * special requirements for escaping your URIs, you should use either
- * {@link CharEscapers#uriEscaper()} or {@link CharEscapers#uriEscaper(boolean)}.
+ * {@link CharEscapers#uriEscaper()} or {@link CharEscapers#uriEscaper(boolean)}
+ * .
  * 
  * <p>
  * When encoding a String, the following rules apply:
@@ -57,8 +59,8 @@ package org.yaml.snakeyaml.external.com.google.gdata.util.common.base;
  * this class is UTF-8.
  * 
  * <p>
- * <b>Note</b>: This escaper produces uppercase hexidecimal sequences. From <a
- * href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>:<br>
+ * <b>Note</b>: This escaper produces uppercase hexidecimal sequences. From
+ * <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a>:<br>
  * <i>"URI producers and normalizers should use uppercase hexadecimal digits for
  * all percent-encodings."</i>
  * 
@@ -120,15 +122,12 @@ public class PercentEscaper extends UnicodeEscaper {
     public PercentEscaper(String safeChars, boolean plusForSpace) {
         // Avoid any misunderstandings about the behavior of this escaper
         if (safeChars.matches(".*[0-9A-Za-z].*")) {
-            throw new IllegalArgumentException(
-                    "Alphanumeric characters are always 'safe' and should not be "
-                            + "explicitly specified");
+            throw new IllegalArgumentException("Alphanumeric characters are always 'safe' and should not be " + "explicitly specified");
         }
         // Avoid ambiguous parameters. Safe characters are never modified so if
         // space is a safe character then setting plusForSpace is meaningless.
         if (plusForSpace && safeChars.contains(" ")) {
-            throw new IllegalArgumentException(
-                    "plusForSpace cannot be specified when space is a 'safe' character");
+            throw new IllegalArgumentException("plusForSpace cannot be specified when space is a 'safe' character");
         }
         if (safeChars.contains("%")) {
             throw new IllegalArgumentException("The '%' character cannot be specified as 'safe'");

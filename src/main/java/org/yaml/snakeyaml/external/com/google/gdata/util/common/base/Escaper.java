@@ -1,16 +1,17 @@
-/* Copyright (c) 2008 Google Inc.
+/*
+ * Copyright (c) 2008 Google Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package org.yaml.snakeyaml.external.com.google.gdata.util.common.base;
@@ -25,11 +26,11 @@ import com.google.common.escape.CharEscaperBuilder;
  * relevant parser.
  * 
  * <p>
- * For example, an XML escaper would convert the literal string
- * {@code "Foo<Bar>"} into {@code "Foo&lt;Bar&gt;"} to prevent {@code "<Bar>"}
- * from being confused with an XML tag. When the resulting XML document is
- * parsed, the parser API will return this text as the original literal string
- * {@code "Foo<Bar>"}.
+ * For example, an XML escaper would convert the literal string {@code 
+ * "Foo<Bar>"} into {@code "Foo&lt;Bar&gt;"} to prevent {@code "<Bar>"} from
+ * being confused with an XML tag. When the resulting XML document is parsed,
+ * the parser API will return this text as the original literal string {@code 
+ * "Foo<Bar>"}.
  * 
  * <p>
  * An {@code Escaper} instance is required to be stateless, and safe when used
@@ -51,8 +52,8 @@ public interface Escaper {
      * Note that this method may treat input characters differently depending on
      * the specific escaper implementation.
      * <ul>
-     * <li>{@link UnicodeEscaper} handles <a
-     * href="http://en.wikipedia.org/wiki/UTF-16">UTF-16</a> correctly,
+     * <li>{@link UnicodeEscaper} handles
+     * <a href="http://en.wikipedia.org/wiki/UTF-16">UTF-16</a> correctly,
      * including surrogate character pairs. If the input is badly formed the
      * escaper should throw {@link IllegalArgumentException}.
      * <li>{@link CharEscaper} handles Java characters independently and does
@@ -81,8 +82,8 @@ public interface Escaper {
      * Note that this method may treat input characters differently depending on
      * the specific escaper implementation.
      * <ul>
-     * <li>{@link UnicodeEscaper} handles <a
-     * href="http://en.wikipedia.org/wiki/UTF-16">UTF-16</a> correctly,
+     * <li>{@link UnicodeEscaper} handles
+     * <a href="http://en.wikipedia.org/wiki/UTF-16">UTF-16</a> correctly,
      * including surrogate character pairs. If the input is badly formed the
      * escaper should throw {@link IllegalArgumentException}.
      * <li>{@link CharEscaper} handles Java characters independently and does

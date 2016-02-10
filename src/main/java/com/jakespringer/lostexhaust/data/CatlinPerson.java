@@ -14,14 +14,8 @@ public class CatlinPerson {
     public final String affiliation;
     public final List<Contact> contact;
     public final List<Relationship> relationships;
-    
-    public CatlinPerson(String _id, String _firstname, 
-            String _lastname,
-            String _gradeLevel,
-            String _classYear,
-            String _affiliation,
-            List<Contact> _contact,
-            List<Relationship> _relationships) {
+
+    public CatlinPerson(String _id, String _firstname, String _lastname, String _gradeLevel, String _classYear, String _affiliation, List<Contact> _contact, List<Relationship> _relationships) {
         id = _id;
         firstname = _firstname;
         lastname = _lastname;

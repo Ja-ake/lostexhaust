@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.introspector;
 
@@ -37,8 +37,7 @@ public class PropertyUtils {
     private boolean allowReadOnlyProperties = false;
     private boolean skipMissingProperties = false;
 
-    protected Map<String, Property> getPropertiesMap(Class<?> type, BeanAccess bAccess)
-            throws IntrospectionException {
+    protected Map<String, Property> getPropertiesMap(Class<?> type, BeanAccess bAccess) throws IntrospectionException {
         if (propertiesCache.containsKey(type)) {
             return propertiesCache.get(type);
         }
@@ -50,8 +49,7 @@ public class PropertyUtils {
             for (Class<?> c = type; c != null; c = c.getSuperclass()) {
                 for (Field field : c.getDeclaredFields()) {
                     int modifiers = field.getModifiers();
-                    if (!Modifier.isStatic(modifiers) && !Modifier.isTransient(modifiers)
-                            && !properties.containsKey(field.getName())) {
+                    if (!Modifier.isStatic(modifiers) && !Modifier.isTransient(modifiers) && !properties.containsKey(field.getName())) {
                         properties.put(field.getName(), new FieldProperty(field));
                     }
                 }
@@ -59,8 +57,7 @@ public class PropertyUtils {
             break;
         default:
             // add JavaBean properties
-            for (PropertyDescriptor property : Introspector.getBeanInfo(type)
-                    .getPropertyDescriptors()) {
+            for (PropertyDescriptor property : Introspector.getBeanInfo(type).getPropertyDescriptors()) {
                 Method readMethod = property.getReadMethod();
                 if (readMethod == null || !readMethod.getName().equals("getClass")) {
                     properties.put(property.getName(), new MethodProperty(property));
@@ -93,8 +90,7 @@ public class PropertyUtils {
         return getProperties(type, beanAccess);
     }
 
-    public Set<Property> getProperties(Class<? extends Object> type, BeanAccess bAccess)
-            throws IntrospectionException {
+    public Set<Property> getProperties(Class<? extends Object> type, BeanAccess bAccess) throws IntrospectionException {
         if (readableProperties.containsKey(type)) {
             return readableProperties.get(type);
         }
@@ -103,8 +99,7 @@ public class PropertyUtils {
         return properties;
     }
 
-    protected Set<Property> createPropertySet(Class<? extends Object> type, BeanAccess bAccess)
-            throws IntrospectionException {
+    protected Set<Property> createPropertySet(Class<? extends Object> type, BeanAccess bAccess) throws IntrospectionException {
         Set<Property> properties = new TreeSet<Property>();
         Collection<Property> props = getPropertiesMap(type, bAccess).values();
         for (Property property : props) {
@@ -115,21 +110,18 @@ public class PropertyUtils {
         return properties;
     }
 
-    public Property getProperty(Class<? extends Object> type, String name)
-            throws IntrospectionException {
+    public Property getProperty(Class<? extends Object> type, String name) throws IntrospectionException {
         return getProperty(type, name, beanAccess);
     }
 
-    public Property getProperty(Class<? extends Object> type, String name, BeanAccess bAccess)
-            throws IntrospectionException {
+    public Property getProperty(Class<? extends Object> type, String name, BeanAccess bAccess) throws IntrospectionException {
         Map<String, Property> properties = getPropertiesMap(type, bAccess);
         Property property = properties.get(name);
         if (property == null && skipMissingProperties) {
             property = new MissingProperty(name);
         }
         if (property == null || !property.isWritable()) {
-            throw new YAMLException("Unable to find property '" + name + "' on class: "
-                    + type.getName());
+            throw new YAMLException("Unable to find property '" + name + "' on class: " + type.getName());
         }
         return property;
     }

@@ -14,16 +14,16 @@ public class CatlinHouseholdContext implements HouseholdContext {
     private final String householdId;
     private CatlinHousehold householdDetails;
     private List<UserContext> residents;
-    
+
     public CatlinHouseholdContext(String id) {
         householdId = id;
     }
-    
+
     public CatlinHouseholdContext(String _householdId, CatlinHousehold _householdDetails) {
         householdId = _householdId;
         householdDetails = _householdDetails;
     }
-    
+
     @Override
     public String getId() {
         return householdId;
@@ -52,7 +52,7 @@ public class CatlinHouseholdContext implements HouseholdContext {
         ifNeededUpdateResidents();
         return residents;
     }
-    
+
     @Override
     public void invalidate() {
         householdDetails = null;
@@ -68,14 +68,11 @@ public class CatlinHouseholdContext implements HouseholdContext {
             }
         }
     }
-    
+
     private void ifNeededUpdateResidents() {
         if (residents == null) {
             try {
-                Collections.reverse(residents = CatlinSql.inst.getUsersFromHousehold(householdId)
-                        .stream()
-                        .map(UserContextFactory::get)
-                        .collect(Collectors.toList()));
+                Collections.reverse(residents = CatlinSql.inst.getUsersFromHousehold(householdId).stream().map(UserContextFactory::get).collect(Collectors.toList()));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

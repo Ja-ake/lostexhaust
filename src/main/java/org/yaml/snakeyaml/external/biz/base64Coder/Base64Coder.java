@@ -1,14 +1,17 @@
-// Copyright 2003-2010 Christian d'Heureuse, Inventec Informatik AG, Zurich, Switzerland
+// Copyright 2003-2010 Christian d'Heureuse, Inventec Informatik AG, Zurich,
+// Switzerland
 // www.source-code.biz, www.inventec.ch/chdh
 //
 // This module is multi-licensed and may be used under the terms
 // of any of the following licenses:
 //
-//  EPL, Eclipse Public License, V1.0 or later, http://www.eclipse.org/legal
-//  LGPL, GNU Lesser General Public License, V2.1 or later, http://www.gnu.org/licenses/lgpl.html
-//  GPL, GNU General Public License, V2 or later, http://www.gnu.org/licenses/gpl.html
-//  AL, Apache License, V2.0 or later, http://www.apache.org/licenses
-//  BSD, BSD License, http://www.opensource.org/licenses/bsd-license.php
+// EPL, Eclipse Public License, V1.0 or later, http://www.eclipse.org/legal
+// LGPL, GNU Lesser General Public License, V2.1 or later,
+// http://www.gnu.org/licenses/lgpl.html
+// GPL, GNU General Public License, V2 or later,
+// http://www.gnu.org/licenses/gpl.html
+// AL, Apache License, V2.0 or later, http://www.apache.org/licenses
+// BSD, BSD License, http://www.opensource.org/licenses/bsd-license.php
 //
 // Please contact the author if you need another license.
 // This module is provided "as is", without warranties of any kind.
@@ -23,8 +26,8 @@ package org.yaml.snakeyaml.external.biz.base64Coder;
  * RFC 1521.
  * 
  * <p>
- * Project home page: <a
- * href="http://www.source-code.biz/base64coder/java/">www.
+ * Project home page:
+ * <a href="http://www.source-code.biz/base64coder/java/">www.
  * source-code.biz/base64coder/java</a><br>
  * Author: Christian d'Heureuse, Inventec Informatik AG, Zurich, Switzerland<br>
  * Multi-licensed: EPL / LGPL / GPL / AL / BSD.
@@ -36,6 +39,7 @@ public class Base64Coder {
 
     // Mapping table from 6-bit nibbles to Base64 characters.
     private static char[] map1 = new char[64];
+
     static {
         int i = 0;
         for (char c = 'A'; c <= 'Z'; c++)
@@ -50,6 +54,7 @@ public class Base64Coder {
 
     // Mapping table from Base64 characters to 6-bit nibbles.
     private static byte[] map2 = new byte[128];
+
     static {
         for (int i = 0; i < map2.length; i++)
             map2[i] = -1;
@@ -99,8 +104,7 @@ public class Base64Coder {
      *            The line separator to be used to separate the output lines.
      * @return A String containing the Base64 encoded data, broken into lines.
      */
-    public static String encodeLines(byte[] in, int iOff, int iLen, int lineLen,
-            String lineSeparator) {
+    public static String encodeLines(byte[] in, int iOff, int iLen, int lineLen, String lineSeparator) {
         int blockLen = (lineLen * 3) / 4;
         if (blockLen <= 0)
             throw new IllegalArgumentException();
@@ -264,8 +268,7 @@ public class Base64Coder {
      */
     public static byte[] decode(char[] in, int iOff, int iLen) {
         if (iLen % 4 != 0)
-            throw new IllegalArgumentException(
-                    "Length of Base64 encoded input string is not a multiple of 4.");
+            throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4.");
         while (iLen > 0 && in[iOff + iLen - 1] == '=')
             iLen--;
         int oLen = (iLen * 3) / 4;
@@ -299,7 +302,6 @@ public class Base64Coder {
     }
 
     // Dummy constructor.
-    private Base64Coder() {
-    }
+    private Base64Coder() {}
 
 } // end class Base64Coder

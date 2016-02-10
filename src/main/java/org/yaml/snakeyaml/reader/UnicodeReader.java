@@ -1,40 +1,33 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.reader;
 
 /**
- version: 1.1 / 2007-01-25
- - changed BOM recognition ordering (longer boms first)
-
- Original pseudocode   : Thomas Weidenfeller
- Implementation tweaked: Aki Nieminen
- Implementation changed: Andrey Somov 
- * UTF-32 removed because it is not supported by YAML
- * no default encoding
-
- http://www.unicode.org/unicode/faq/utf_bom.html
- BOMs:
- 00 00 FE FF    = UTF-32, big-endian
- FF FE 00 00    = UTF-32, little-endian
- EF BB BF       = UTF-8,
- FE FF          = UTF-16, big-endian
- FF FE          = UTF-16, little-endian
-
- Win2k Notepad:
- Unicode format = UTF-16LE
+ * version: 1.1 / 2007-01-25 - changed BOM recognition ordering (longer boms
+ * first)
+ * 
+ * Original pseudocode : Thomas Weidenfeller Implementation tweaked: Aki
+ * Nieminen Implementation changed: Andrey Somov UTF-32 removed because it is
+ * not supported by YAML no default encoding
+ * 
+ * http://www.unicode.org/unicode/faq/utf_bom.html BOMs: 00 00 FE FF = UTF-32,
+ * big-endian FF FE 00 00 = UTF-32, little-endian EF BB BF = UTF-8, FE FF =
+ * UTF-16, big-endian FF FE = UTF-16, little-endian
+ * 
+ * Win2k Notepad: Unicode format = UTF-16LE
  ***/
 
 import java.io.IOException;
@@ -108,8 +101,7 @@ public class UnicodeReader extends Reader {
             internalIn.unread(bom, (n - unread), unread);
 
         // Use given encoding
-        CharsetDecoder decoder = encoding.newDecoder().onUnmappableCharacter(
-                CodingErrorAction.REPORT);
+        CharsetDecoder decoder = encoding.newDecoder().onUnmappableCharacter(CodingErrorAction.REPORT);
         internalIn2 = new InputStreamReader(internalIn, decoder);
     }
 

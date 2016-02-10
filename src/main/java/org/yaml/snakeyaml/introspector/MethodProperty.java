@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.introspector;
 
@@ -34,9 +34,7 @@ public class MethodProperty extends GenericProperty {
     private final boolean writable;
 
     public MethodProperty(PropertyDescriptor property) {
-        super(property.getName(), property.getPropertyType(),
-                property.getReadMethod() == null ? null : property.getReadMethod()
-                        .getGenericReturnType());
+        super(property.getName(), property.getPropertyType(), property.getReadMethod() == null ? null : property.getReadMethod().getGenericReturnType());
         this.property = property;
         this.readable = property.getReadMethod() != null;
         this.writable = property.getWriteMethod() != null;
@@ -53,8 +51,7 @@ public class MethodProperty extends GenericProperty {
             property.getReadMethod().setAccessible(true);// issue 50
             return property.getReadMethod().invoke(object);
         } catch (Exception e) {
-            throw new YAMLException("Unable to find getter for property '" + property.getName()
-                    + "' on object " + object + ":" + e);
+            throw new YAMLException("Unable to find getter for property '" + property.getName() + "' on object " + object + ":" + e);
         }
     }
 

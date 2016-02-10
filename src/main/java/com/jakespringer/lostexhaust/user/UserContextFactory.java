@@ -11,7 +11,7 @@ public class UserContextFactory {
                 return user;
             }
         }
-        
+
         return new CatlinUserContext(id);
     }
 }

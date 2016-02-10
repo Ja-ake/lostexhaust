@@ -1,17 +1,17 @@
 /**
  * Copyright (c) 2008, http://www.snakeyaml.org
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 package org.yaml.snakeyaml.constructor;
 
@@ -245,8 +245,7 @@ public class Constructor extends SafeConstructor {
                         switch (valueNode.getNodeId()) {
                         case sequence:
                             SequenceNode snode = (SequenceNode) valueNode;
-                            Class<? extends Object> memberType = memberDescription
-                                    .getListPropertyType(key);
+                            Class<? extends Object> memberType = memberDescription.getListPropertyType(key);
                             if (memberType != null) {
                                 snode.setListType(memberType);
                                 typeDetected = true;
@@ -302,23 +301,21 @@ public class Constructor extends SafeConstructor {
                             value = ((Double) value).floatValue();
                         }
                     }
-                    // Correct when the property a String but the value is binary
+                    // Correct when the property a String but the value is
+                    // binary
                     if (property.getType() == String.class && Tag.BINARY.equals(valueNode.getTag()) && value instanceof byte[]) {
-                        value = new String((byte[])value);
+                        value = new String((byte[]) value);
                     }
 
                     property.set(object, value);
                 } catch (Exception e) {
-                    throw new ConstructorException("Cannot create property=" + key
-                            + " for JavaBean=" + object, node.getStartMark(), e.getMessage(),
-                            valueNode.getStartMark(), e);
+                    throw new ConstructorException("Cannot create property=" + key + " for JavaBean=" + object, node.getStartMark(), e.getMessage(), valueNode.getStartMark(), e);
                 }
             }
             return object;
         }
 
-        protected Property getProperty(Class<? extends Object> type, String name)
-                throws IntrospectionException {
+        protected Property getProperty(Class<? extends Object> type, String name) throws IntrospectionException {
             return getPropertyUtils().getProperty(type, name);
         }
     }
@@ -346,8 +343,7 @@ public class Constructor extends SafeConstructor {
             } catch (ConstructorException e) {
                 throw e;
             } catch (Exception e) {
-                throw new ConstructorException(null, null, "Can't construct a java object for "
-                        + node.getTag() + "; exception=" + e.getMessage(), node.getStartMark(), e);
+                throw new ConstructorException(null, null, "Can't construct a java object for " + node.getTag() + "; exception=" + e.getMessage(), node.getStartMark(), e);
             }
             return result;
         }
@@ -356,9 +352,7 @@ public class Constructor extends SafeConstructor {
             try {
                 getConstructor(node).construct2ndStep(node, object);
             } catch (Exception e) {
-                throw new ConstructorException(null, null,
-                        "Can't construct a second step for a java object for " + node.getTag()
-                                + "; exception=" + e.getMessage(), node.getStartMark(), e);
+                throw new ConstructorException(null, null, "Can't construct a second step for a java object for " + node.getTag() + "; exception=" + e.getMessage(), node.getStartMark(), e);
             }
         }
     }
@@ -372,17 +366,14 @@ public class Constructor extends SafeConstructor {
             ScalarNode node = (ScalarNode) nnode;
             Class<?> type = node.getType();
             Object result;
-            if (type.isPrimitive() || type == String.class || Number.class.isAssignableFrom(type)
-                    || type == Boolean.class || Date.class.isAssignableFrom(type)
-                    || type == Character.class || type == BigInteger.class
-                    || type == BigDecimal.class || Enum.class.isAssignableFrom(type)
-                    || Tag.BINARY.equals(node.getTag()) || Calendar.class.isAssignableFrom(type) || type == UUID.class) {
+            if (type.isPrimitive() || type == String.class || Number.class.isAssignableFrom(type) || type == Boolean.class || Date.class.isAssignableFrom(type) || type == Character.class
+                    || type == BigInteger.class || type == BigDecimal.class || Enum.class.isAssignableFrom(type) || Tag.BINARY.equals(node.getTag()) || Calendar.class.isAssignableFrom(type)
+                    || type == UUID.class) {
                 // standard classes created directly
                 result = constructStandardJavaInstance(type, node);
             } else {
                 // there must be only 1 constructor with 1 argument
-                java.lang.reflect.Constructor<?>[] javaConstructors = type
-                        .getDeclaredConstructors();
+                java.lang.reflect.Constructor<?>[] javaConstructors = type.getDeclaredConstructors();
                 int oneArgCount = 0;
                 java.lang.reflect.Constructor<?> javaConstructor = null;
                 for (java.lang.reflect.Constructor<?> c : javaConstructors) {
@@ -395,8 +386,7 @@ public class Constructor extends SafeConstructor {
                 if (javaConstructor == null) {
                     throw new YAMLException("No single argument constructor found for " + type);
                 } else if (oneArgCount == 1) {
-                    argument = constructStandardJavaInstance(
-                            javaConstructor.getParameterTypes()[0], node);
+                    argument = constructStandardJavaInstance(javaConstructor.getParameterTypes()[0], node);
                 } else {
                     // TODO it should be possible to use implicit types instead
                     // of forcing String. Resolver must be available here to
@@ -408,26 +398,21 @@ public class Constructor extends SafeConstructor {
                     try {
                         javaConstructor = type.getDeclaredConstructor(String.class);
                     } catch (Exception e) {
-                        throw new YAMLException("Can't construct a java object for scalar "
-                                + node.getTag() + "; No String constructor found. Exception="
-                                + e.getMessage(), e);
+                        throw new YAMLException("Can't construct a java object for scalar " + node.getTag() + "; No String constructor found. Exception=" + e.getMessage(), e);
                     }
                 }
                 try {
                     javaConstructor.setAccessible(true);
                     result = javaConstructor.newInstance(argument);
                 } catch (Exception e) {
-                    throw new ConstructorException(null, null,
-                            "Can't construct a java object for scalar " + node.getTag()
-                                    + "; exception=" + e.getMessage(), node.getStartMark(), e);
+                    throw new ConstructorException(null, null, "Can't construct a java object for scalar " + node.getTag() + "; exception=" + e.getMessage(), node.getStartMark(), e);
                 }
             }
             return result;
         }
 
         @SuppressWarnings("unchecked")
-        private Object constructStandardJavaInstance(@SuppressWarnings("rawtypes")
-        Class type, ScalarNode node) {
+        private Object constructStandardJavaInstance(@SuppressWarnings("rawtypes") Class type, ScalarNode node) {
             Object result;
             if (type == String.class) {
                 Construct stringConstructor = yamlConstructors.get(Tag.STR);
@@ -441,8 +426,7 @@ public class Constructor extends SafeConstructor {
                 if (ch.length() == 0) {
                     result = null;
                 } else if (ch.length() != 1) {
-                    throw new YAMLException("Invalid node Character: '" + ch + "'; length: "
-                            + ch.length());
+                    throw new YAMLException("Invalid node Character: '" + ch + "'; length: " + ch.length());
                 } else {
                     result = Character.valueOf(ch.charAt(0));
                 }
@@ -461,8 +445,7 @@ public class Constructor extends SafeConstructor {
                         throw new YAMLException("Cannot construct: '" + type + "'");
                     }
                 }
-            } else if (type == Float.class || type == Double.class || type == Float.TYPE
-                    || type == Double.TYPE || type == BigDecimal.class) {
+            } else if (type == Float.class || type == Double.class || type == Float.TYPE || type == Double.TYPE || type == BigDecimal.class) {
                 if (type == BigDecimal.class) {
                     result = new BigDecimal(node.getValue());
                 } else {
@@ -472,9 +455,8 @@ public class Constructor extends SafeConstructor {
                         result = new Float((Double) result);
                     }
                 }
-            } else if (type == Byte.class || type == Short.class || type == Integer.class
-                    || type == Long.class || type == BigInteger.class || type == Byte.TYPE
-                    || type == Short.TYPE || type == Integer.TYPE || type == Long.TYPE) {
+            } else if (type == Byte.class || type == Short.class || type == Integer.class || type == Long.class || type == BigInteger.class || type == Byte.TYPE || type == Short.TYPE
+                    || type == Integer.TYPE || type == Long.TYPE) {
                 Construct intConstructor = yamlConstructors.get(Tag.INT);
                 result = intConstructor.construct(node);
                 if (type == Byte.class || type == Byte.TYPE) {
@@ -494,8 +476,7 @@ public class Constructor extends SafeConstructor {
                 try {
                     result = Enum.valueOf(type, enumValueName);
                 } catch (Exception ex) {
-                    throw new YAMLException("Unable to find enum value '" + enumValueName
-                            + "' for enum class: " + type.getName());
+                    throw new YAMLException("Unable to find enum value '" + enumValueName + "' for enum class: " + type.getName());
                 }
             } else if (Calendar.class.isAssignableFrom(type)) {
                 ConstructYamlTimestamp contr = new ConstructYamlTimestamp();
@@ -504,7 +485,7 @@ public class Constructor extends SafeConstructor {
             } else if (Number.class.isAssignableFrom(type)) {
                 ConstructYamlNumber contr = new ConstructYamlNumber();
                 result = contr.construct(node);
-            }  else if (UUID.class == type) {
+            } else if (UUID.class == type) {
                 result = UUID.fromString(node.getValue());
             } else {
                 if (yamlConstructors.containsKey(node.getTag())) {
@@ -545,10 +526,8 @@ public class Constructor extends SafeConstructor {
                 }
             } else {
                 // create immutable object
-                List<java.lang.reflect.Constructor<?>> possibleConstructors = new ArrayList<java.lang.reflect.Constructor<?>>(
-                        snode.getValue().size());
-                for (java.lang.reflect.Constructor<?> constructor : node.getType()
-                        .getConstructors()) {
+                List<java.lang.reflect.Constructor<?>> possibleConstructors = new ArrayList<java.lang.reflect.Constructor<?>>(snode.getValue().size());
+                for (java.lang.reflect.Constructor<?> constructor : node.getType().getConstructors()) {
                     if (snode.getValue().size() == constructor.getParameterTypes().length) {
                         possibleConstructors.add(constructor);
                     }
@@ -599,9 +578,7 @@ public class Constructor extends SafeConstructor {
                         }
                     }
                 }
-                throw new YAMLException("No suitable constructor with "
-                        + String.valueOf(snode.getValue().size()) + " arguments found for "
-                        + node.getType());
+                throw new YAMLException("No suitable constructor with " + String.valueOf(snode.getValue().size()) + " arguments found for " + node.getType());
 
             }
         }
