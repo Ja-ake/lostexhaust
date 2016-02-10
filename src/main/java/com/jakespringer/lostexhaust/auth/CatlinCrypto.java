@@ -39,20 +39,21 @@ public class CatlinCrypto {
         byte[] encoded_bytes = DatatypeConverter.parseHexBinary(encoded);
 
         File keyfile = new File(publicKeyFileName);
-        DataInputStream dis = new DataInputStream(new FileInputStream(keyfile));
-        byte[] keyBytes = new byte[(int) keyfile.length()];
-        dis.readFully(keyBytes);
-        dis.close();
-
-        X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(spec);
-
-        Cipher rsa = Cipher.getInstance("RSA");
-        rsa.init(Cipher.DECRYPT_MODE, publicKey);
-
-        byte[] plainBytes = rsa.doFinal(encoded_bytes);
-        return new String(plainBytes);
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(keyfile))) {
+            byte[] keyBytes = new byte[(int) keyfile.length()];
+            dis.readFully(keyBytes);
+            dis.close();
+    
+            X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            RSAPublicKey publicKey = (RSAPublicKey) keyFactory.generatePublic(spec);
+    
+            Cipher rsa = Cipher.getInstance("RSA");
+            rsa.init(Cipher.DECRYPT_MODE, publicKey);
+    
+            byte[] plainBytes = rsa.doFinal(encoded_bytes);
+            return new String(plainBytes);
+        }
     }
 
     private static Pattern _ipPattern = Pattern.compile("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");

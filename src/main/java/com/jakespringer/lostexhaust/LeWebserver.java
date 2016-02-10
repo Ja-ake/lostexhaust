@@ -8,6 +8,7 @@
 
 package com.jakespringer.lostexhaust;
 
+import static spark.Spark.get;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -37,7 +38,6 @@ import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
 import spark.ModelAndView;
 import spark.Spark;
-import static spark.Spark.*;
 
 public class LeWebserver {
     public static final String PUB_DIR = System.getProperty("user.dir") + "/src/main/webapp/public/";

@@ -164,11 +164,11 @@ public class JSONWriter {
      * @throws JSONException
      *             If unbalanced.
      */
-    private JSONWriter end(char mode, char c) throws JSONException {
-        if (this.mode != mode) {
-            throw new JSONException(mode == 'a' ? "Misplaced endArray." : "Misplaced endObject.");
+    private JSONWriter end(char _mode, char c) throws JSONException {
+        if (this.mode != _mode) {
+            throw new JSONException(_mode == 'a' ? "Misplaced endArray." : "Misplaced endObject.");
         }
-        this.pop(mode);
+        this.pop(_mode);
         try {
             this.writer.write(c);
         } catch (IOException e) {

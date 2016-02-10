@@ -1,5 +1,6 @@
 package com.jakespringer.lostexhaust.data;
 
+import static com.jakespringer.lostexhaust.util.Quick.succOrNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +12,7 @@ import org.json.JSONObject;
 import com.jakespringer.lostexhaust.LeService;
 import com.jakespringer.lostexhaust.user.Contact;
 import com.jakespringer.lostexhaust.user.Relationship;
-import com.jakespringer.lostexhaust.util.Timer;
 import com.jakespringer.lostexhaust.util.Web;
-import static com.jakespringer.lostexhaust.util.Quick.succOrNull;
 
 public class CatlinApi {
     private static final String apiToken = LeService.getConfig().getString("catlin_api_token");

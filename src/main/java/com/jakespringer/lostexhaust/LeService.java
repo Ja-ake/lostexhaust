@@ -18,10 +18,7 @@
  */
 package com.jakespringer.lostexhaust;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.json.JSONObject;
@@ -33,20 +30,6 @@ public class LeService {
         // 12 hours
         // TODO add to configuration
         return 43200L;
-    }
-
-    public static String fetchUrl(String urlName) throws IOException {
-        StringBuilder b = new StringBuilder();
-        URL url = new URL(urlName);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            b.append(line);
-        }
-        reader.close();
-
-        return b.toString();
     }
 
     public static String getFileSuffix(String path) {

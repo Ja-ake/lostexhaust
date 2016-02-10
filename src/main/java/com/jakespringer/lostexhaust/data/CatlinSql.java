@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import com.jakespringer.lostexhaust.LeService;
 import com.jakespringer.lostexhaust.util.Quick;
-import com.jakespringer.lostexhaust.util.Timer;
 
 public class CatlinSql {
     public static final CatlinSql inst = new CatlinSql();
