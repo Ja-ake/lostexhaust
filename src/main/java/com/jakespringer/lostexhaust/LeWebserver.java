@@ -76,10 +76,10 @@ public class LeWebserver {
         System.out.println("[LostExhaust] Finished loading Catlin household data.");
 
         // ignite spark
-        Spark.secure(LeService.getConfig().getString("keystoreFile"), 
-        		LeService.getConfig().optString("keystorePassword"),
-        		LeService.getConfig().getString("truststoreFile"),
-        		LeService.getConfig().optString("truststorePassword"));
+        Spark.secure(LeService.getConfig().getString("keystore_file"), 
+        		LeService.getConfig().optString("keystore_password"),
+        		LeService.getConfig().getString("truststore_file"),
+        		LeService.getConfig().optString("truststore_password"));
         Spark.port(port);
 
         Pebble2TemplateEngine pebbleEngine = new Pebble2TemplateEngine();
