@@ -78,8 +78,8 @@ public class LeWebserver {
         // ignite spark
         Spark.secure(LeService.getConfig().getString("keystore_file"), 
         		LeService.getConfig().optString("keystore_password"),
-        		LeService.getConfig().getString("truststore_file"),
-        		LeService.getConfig().optString("truststore_password"));
+        		/*LeService.getConfig().getString("truststore_file")*/ null,
+        		/*LeService.getConfig().optString("truststore_password")*/ null);
         Spark.port(port);
 
         Pebble2TemplateEngine pebbleEngine = new Pebble2TemplateEngine();
