@@ -66,7 +66,7 @@ public class LeWebserver {
         }
 
         // Tests.test();
-
+        
         System.out.println("[LostExhaust] Loading Catlin household data...");
         try {
             CatlinSql.inst.getAllHouseholds().stream().map(x -> new CatlinHouseholdContext(x.id, x)).forEach(ContextCache::addHousehold);
@@ -76,6 +76,10 @@ public class LeWebserver {
         System.out.println("[LostExhaust] Finished loading Catlin household data.");
 
         // ignite spark
+        Spark.secure(LeService.getConfig().getString("keystoreFile"), 
+        		LeService.getConfig().optString("keystorePassword"),
+        		LeService.getConfig().getString("truststoreFile"),
+        		LeService.getConfig().optString("truststorePassword"));
         Spark.port(port);
 
         Pebble2TemplateEngine pebbleEngine = new Pebble2TemplateEngine();
