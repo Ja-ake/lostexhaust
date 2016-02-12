@@ -21,6 +21,7 @@ public class CatlinSql {
 	private final int port = 3306;
 	private final String lookupTable = "lostexhaust.users";
 	private final String householdsTable = "lostexhaust.households";
+	private final String hiddenTable = "lostexhaust.hidden";
 
 	private Connection connection;
 
@@ -133,7 +134,7 @@ public class CatlinSql {
 	public synchronized List<String> getHiddenHouseholds() throws SQLException {
 		tryReconnect();
 
-		String statement = "SELECT household_id FROM " + householdsTable;
+		String statement = "SELECT household_id FROM " + hiddenTable;
 		try (PreparedStatement ps = connection.prepareStatement(statement)) {
 			try (ResultSet householdResults = ps.executeQuery()) {
 				List<String> ids = new ArrayList<>();
@@ -148,7 +149,7 @@ public class CatlinSql {
 	public synchronized void setHouseholdHidden(String householdId) throws SQLException {
 		tryReconnect();
 
-		String statement = "INSERT INTO " + householdsTable + " (household_id) VALUES ( ? )";
+		String statement = "INSERT INTO " + hiddenTable + " (household_id) VALUES ( ? )";
 		try (PreparedStatement ps = connection.prepareStatement(statement)) {
 			ps.setString(1, householdId);
 			ps.execute();
@@ -158,7 +159,7 @@ public class CatlinSql {
 	public synchronized void setHouseholdVisible(String householdId) throws SQLException {
 		tryReconnect();
 
-		String statement = "DELETE FROM " + householdsTable + " WHERE household_id = ?";
+		String statement = "DELETE FROM " + hiddenTable + " WHERE household_id = ?";
 		try (PreparedStatement ps = connection.prepareStatement(statement)) {
 			ps.setString(1, householdId);
 			ps.execute();
