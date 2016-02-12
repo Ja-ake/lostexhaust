@@ -9,18 +9,19 @@
 package com.jakespringer.lostexhaust;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 import com.jakespringer.lostexhaust.auth.CatlinSessionService;
 import com.jakespringer.lostexhaust.data.CatlinApi;
 import com.jakespringer.lostexhaust.data.CatlinHouseholdContext;
@@ -104,7 +105,9 @@ public class LeWebserver {
                     origin = user.getHouseholds().get(0);
                 else
                     origin = user.getHouseholds().get(Integer.parseInt(h));
-                List<Carpool> sorted = CarpoolSorter.sort(origin, ContextCache.getHouseholds()).subList(1, 20);
+                List<String> toRemove = CatlinSql.inst.getHiddenHouseholds();
+                List<Carpool> sorted = CarpoolSorter.sort(origin, ContextCache.getHouseholds().stream()
+                		.filter(x -> !toRemove.contains(x.getId())).collect(Collectors.toList())).subList(0, 20);
 
                 Set<String> peopleToRequest = new HashSet<>();
                 sorted.stream().forEach(x -> {
@@ -131,6 +134,7 @@ public class LeWebserver {
                 context.put("sorted", sorted);
                 return new ModelAndView(context, PUB_DIR + "near.peb");
             } else {
+            	res.redirect("https://inside.catlin.edu/api/lostexhaust/login.py");
                 return new ModelAndView(null, PUB_DIR + "invalidsession.peb");
             }
         } , pebbleEngine);
@@ -152,6 +156,7 @@ public class LeWebserver {
                 else
                     context.put("h", Integer.parseInt(h));
                 context.put("hidden", CatlinSql.inst.getHiddenHouseholds().contains(household.getId()));
+                context.put("household_id", household.getId());
                 context.put("user", user);
                 context.put("nickname", user.getFirstname());
                 context.put("address", household.getAddress());
@@ -159,6 +164,7 @@ public class LeWebserver {
                 context.put("inhabitants", household.getResidents());
                 return new ModelAndView(context, PUB_DIR + "home.peb");
             } else {
+            	res.redirect("https://inside.catlin.edu/api/lostexhaust/login.py");
                 return new ModelAndView(null, PUB_DIR + "invalidsession.peb");
             }
         } , pebbleEngine);
@@ -175,13 +181,18 @@ public class LeWebserver {
                     household = user.getHouseholds().get(0);
                 else
                     household = HouseholdContextFactory.get(h);
-                // context.put("user", user);
-                context.put("nickname", user.getFirstname());
-                context.put("address", household.getAddress());
-                context.put("place_id", household.getPlaceId());
-                context.put("inhabitants", household.getResidents());
-                return new ModelAndView(context, PUB_DIR + "household.peb");
+	            if (!CatlinSql.inst.getHiddenHouseholds().contains(household.getId())) {
+                	// context.put("user", user);
+	                context.put("nickname", user.getFirstname());
+	                context.put("address", household.getAddress());
+	                context.put("place_id", household.getPlaceId());
+	                context.put("inhabitants", household.getResidents());
+	                return new ModelAndView(context, PUB_DIR + "household.peb");
+	            } else {
+	            	return new ModelAndView(context, PUB_DIR + "null");
+	            }
             } else {
+            	res.redirect("https://inside.catlin.edu/api/lostexhaust/login.py");
                 return new ModelAndView(null, PUB_DIR + "invalidsession.peb");
             }
         } , pebbleEngine);
@@ -195,6 +206,7 @@ public class LeWebserver {
                 context.put("user", user);
                 return new ModelAndView(context, PUB_DIR + "profile.peb");
             } else {
+            	res.redirect("https://inside.catlin.edu/api/lostexhaust/login.py");
                 return new ModelAndView(null, PUB_DIR + "invalidsession.peb");
             }
         } , pebbleEngine);
@@ -210,6 +222,7 @@ public class LeWebserver {
                 context.put("person", UserContextFactory.get(p));
                 return new ModelAndView(context, PUB_DIR + "person.peb");
             } else {
+            	res.redirect("https://inside.catlin.edu/api/lostexhaust/login.py");
                 return new ModelAndView(null, PUB_DIR + "invalidsession.peb");
             }
         } , pebbleEngine);
@@ -253,6 +266,36 @@ public class LeWebserver {
             res.removeCookie("session");
             res.redirect("/");
             return "You are being redirected. Please wait a moment.";
+        });
+        
+        post("/hide", (req, res) -> {
+        	UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
+        	if (userSession != null) {
+        		try {
+        			HouseholdContext c = userSession.getContext().getHouseholds().stream()
+        					.filter(x -> x.getId().equals(req.queryParams("household_id"))).findFirst().get();
+        			CatlinSql.inst.setHouseholdHidden(c.getId());
+        		} catch (NoSuchElementException e) {
+        			// do nothing!
+        		}
+        	}
+        	res.redirect("/home.html");
+        	return "You are being redirected. Please wait a moment.";
+        });
+        
+        post("/show", (req, res) -> {
+        	UserSession userSession = sessionService.getSession(req.cookie("session"), req.ip());
+        	if (userSession != null) {
+        		try {
+        			HouseholdContext c = userSession.getContext().getHouseholds().stream()
+        					.filter(x -> x.getId().equals(req.queryParams("household_id"))).findFirst().get();
+        			CatlinSql.inst.setHouseholdVisible(c.getId());
+        		} catch (NoSuchElementException e) {
+        			// do nothing!
+        		}
+        	}
+        	res.redirect("/home.html");
+        	return "You are being redirected. Please wait a moment.";
         });
 
         get("/*", (req, res) -> {
