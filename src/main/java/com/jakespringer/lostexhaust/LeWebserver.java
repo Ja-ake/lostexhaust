@@ -150,6 +150,7 @@ public class LeWebserver {
                     context.put("h", 0);
                 else
                     context.put("h", Integer.parseInt(h));
+                context.put("hidden", CatlinSql.inst.getHiddenHouseholds().contains(household.getId()));
                 context.put("user", user);
                 context.put("nickname", user.getFirstname());
                 context.put("address", household.getAddress());
