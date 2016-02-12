@@ -43,7 +43,7 @@
         {% if not hidden %}
           Your household is visible to others. Check <input type="checkbox" onclick="javascript:alert('you have checked the box');> to hide your household from other's search results.
         {% else %}
-          Your household is hidden to others. Uncheck <input type="checkbox" onclick="javascript:alert('you have unchecked the box');"> to show your household in other's search results.
+          Your household is hidden to others. Uncheck <input checked type="checkbox" onclick="javascript:alert('you have unchecked the box');"> to show your household in other's search results.
         {% endif %}
       </div>
     </div>
