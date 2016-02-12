@@ -100,6 +100,14 @@ public class LeWebserver {
                 Map<String, Object> context = new HashMap<>();
                 UserContext user = userSession.getContext();
                 HouseholdContext origin;
+                
+                int number;
+                try {
+                	number = Math.min(Integer.parseInt(req.queryParams("more")), ContextCache.getHouseholds().size());
+                } catch (NumberFormatException e) {
+                	number = Math.min(10, ContextCache.getHouseholds().size());
+                }
+                
                 String h = req.queryParams("h");
                 if (h == null || h.isEmpty())
                     origin = user.getHouseholds().get(0);
@@ -107,7 +115,7 @@ public class LeWebserver {
                     origin = user.getHouseholds().get(Integer.parseInt(h));
                 List<String> toRemove = CatlinSql.inst.getHiddenHouseholds();
                 List<Carpool> sorted = CarpoolSorter.sort(origin, ContextCache.getHouseholds().stream()
-                		.filter(x -> !toRemove.contains(x.getId())).collect(Collectors.toList())).subList(1, 20);
+                		.filter(x -> !toRemove.contains(x.getId())).collect(Collectors.toList())).subList(1, number+1);
 
                 Set<String> peopleToRequest = new HashSet<>();
                 sorted.stream().forEach(x -> {
@@ -132,6 +140,7 @@ public class LeWebserver {
                     context.put("h", Integer.parseInt(h));
                 context.put("user", user);
                 context.put("sorted", sorted);
+                context.put("number", number);
                 return new ModelAndView(context, PUB_DIR + "near.peb");
             } else {
             	res.redirect("https://inside.catlin.edu/api/lostexhaust/login.py");

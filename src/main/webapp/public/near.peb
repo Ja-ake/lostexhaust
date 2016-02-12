@@ -41,6 +41,7 @@
   	  </span>
   	</div><br><hr class="near">
   	{% endfor %}
+  	<a href="/near.html?more={{ max(number + 10, 10) }}">See more</a> | <a href="/near.html?more={{ max(number - 10, 10) }}">See less</a>
   	</div>
   </div>
 </body>
