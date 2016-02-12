@@ -7,17 +7,19 @@
 <center>
 <div style="margin-top: 12px">
 <iframe id="embedded" style="margin-left: auto; margin-right: auto; height: 100%; width: 63%; min-width: 500px; outline: none; border: 0px;" 
-    src="/near.html"></iframe>
+    src="https://catlin.lostexhaust.org:8080/"></iframe>
 </div>
 </center>
 </body>
 <script>
 $('iframe').load(function() {
-   this.style.height = $('iframe').contents().height();
+    this.style.height = 0px;
+    this.style.height = $('iframe').contents().height();
 });
 
 $(window).resize(function() {
-	$('#embedded').css("height", "" + ($('#embedded').contents().height()+16));
+    $('#embedded').css("height", "0px"
+	$('#embedded').css("height", ($('#embedded').contents().height()+16) + "px");
 });
 </script>
 </html>
