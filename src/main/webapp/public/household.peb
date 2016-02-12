@@ -5,9 +5,9 @@
 <body>
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
-    <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
-    <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
-    <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
+    <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near me</span></a></li>
+    <li class="pe"><a class="pe" href="home.html"><span class="pe">My household</span></a></li>
+    <li class="pe"><a class="pe" href="profile.html"><span class="pe">My profile</span></a></li>
   </ul></div>
   <div class="content">
     <h1 class="page-title">Household</h1>

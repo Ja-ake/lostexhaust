@@ -5,12 +5,12 @@
 <body>
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
-    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Households near you</span></a></li>
-    <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
-    <li class="pe"><a class="pe" href="profile.html"><span class="pe">Your profile</span></a></li>
+    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Households near me</span></a></li>
+    <li class="pe"><a class="pe" href="home.html"><span class="pe">My household</span></a></li>
+    <li class="pe"><a class="pe" href="profile.html"><span class="pe">My profile</span></a></li>
   </ul></div>
   <div class="content">
-    <h1 class="page-title">Households Near You</h1>
+    <h1 class="page-title">Households Near Me</h1>
     <div class="near-content"><span class="household-select">Current household:  
     <select onchange="javascript:window.location.href='/near.html?h='+this.selectedIndex;">
       {% for household in user.households %}

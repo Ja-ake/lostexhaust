@@ -5,12 +5,12 @@
 <body>
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
-    <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near you</span></a></li>
-    <li class="pe"><a class="pe" href="home.html"><span class="pe">Your household</span></a></li>
-    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Your profile</span></a></li>
+    <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near me</span></a></li>
+    <li class="pe"><a class="pe" href="home.html"><span class="pe">My household</span></a></li>
+    <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">My profile</span></a></li>
   </ul></div>
   <div class="content">
-    <h1 class="page-title">Your Profile</h1>
+    <h1 class="page-title">My Profile</h1>
     <div class="profile-header">
       <img width="100px" class="profile-header" src="img/{{ user.id }}.jpg">
       <h2 class="profile-header">{{ user.firstname }} {{ user.lastname }}</h2><br>
