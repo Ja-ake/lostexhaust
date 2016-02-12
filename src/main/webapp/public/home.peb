@@ -69,9 +69,9 @@
         {% endfor %}
         <br>
         {% if not hidden %}
-          Your household is visible to others. Check <input type="checkbox" onclick="javascript:postHide();";> to hide your household from other's search results.
+          Your household is visible to others. Check <input type="checkbox" onclick="javascript:postHide();"> to hide your household from other's search results.
         {% else %}
-          Your household is hidden to others. Uncheck <input type="checkbox" onclick="javascript:postShow();" value="on"> to show your household in other's search results.
+          Your household is hidden to others. Uncheck <input type="checkbox" onclick="javascript:postShow();" checked="true" value="on"> to show your household in other's search results.
         {% endif %}
       </div>
     </div>

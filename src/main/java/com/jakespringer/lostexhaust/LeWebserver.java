@@ -107,7 +107,7 @@ public class LeWebserver {
                     origin = user.getHouseholds().get(Integer.parseInt(h));
                 List<String> toRemove = CatlinSql.inst.getHiddenHouseholds();
                 List<Carpool> sorted = CarpoolSorter.sort(origin, ContextCache.getHouseholds().stream()
-                		.filter(x -> !toRemove.contains(x.getId())).collect(Collectors.toList())).subList(0, 20);
+                		.filter(x -> !toRemove.contains(x.getId())).collect(Collectors.toList())).subList(1, 20);
 
                 Set<String> peopleToRequest = new HashSet<>();
                 sorted.stream().forEach(x -> {
