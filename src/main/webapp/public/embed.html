@@ -6,18 +6,18 @@
 <!-- <div style="width: 100%; height: 120px; background-color: #EEEEEE;"></div> -->
 <center>
 <div style="margin-top: 12px">
-<iframe id="embedded" seamless="seamless" style="margin-left: auto; margin-right: auto; height: 100%; width: 63%; min-width: 500px; outline: none; border: 0px;" 
+<iframe id="embedded" style="margin-left: auto; margin-right: auto; height: 100%; width: 63%; min-width: 500px; outline: none; border: 0px;" 
     src="/near.html"></iframe>
 </div>
 </center>
 </body>
 <script>
-//$('iframe').load(function() {
-//   this.style.height = $('iframe').contents().height();
-//});
+$('iframe').load(function() {
+   this.style.height = $('iframe').contents().height();
+});
 
-//$(window).resize(function() {
-//	$('#embedded').css("height", "" + ($('#embedded').contents().height()+16));
-//});
+$(window).resize(function() {
+	$('#embedded').css("height", "" + ($('#embedded').contents().height()+16));
+});
 </script>
 </html>
