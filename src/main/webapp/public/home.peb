@@ -39,6 +39,12 @@
           <span class="profile-info-field"><i>{{ inhabitant.affiliation }}</i></span>
           <span class="profile-info-entry"><a class="residents" href="person.html?p={{ inhabitant.id }}">{{ inhabitant.firstname }} {{ inhabitant.lastname }}</a></span><hr align="left" class="household">
         {% endfor %}
+        <br>
+        {% if not hidden %}
+          Your household is visible to others. Check <input type="checkbox" onclick="javascript:alert('you have checked the box');> to hide your household from other's search results.
+        {% else %}
+          Your household is hidden to others. Uncheck <input type="checkbox" onclick="javascript:alert('you have unchecked the box');"> to show your household in other's search results.
+        {% endif %}
       </div>
     </div>
   </div>
