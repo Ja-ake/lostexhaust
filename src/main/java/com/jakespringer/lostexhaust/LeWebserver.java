@@ -36,6 +36,8 @@ import com.jakespringer.lostexhaust.user.UserContext;
 import com.jakespringer.lostexhaust.user.UserContextFactory;
 import com.jakespringer.lostexhaust.user.UserSession;
 import com.jakespringer.lostexhaust.util.Pebble2TemplateEngine;
+import com.jakespringer.lostexhaust.util.Quick;
+
 import spark.ModelAndView;
 import spark.Spark;
 
@@ -76,10 +78,10 @@ public class LeWebserver {
         System.out.println("[LostExhaust] Finished loading Catlin household data.");
 
         // ignite spark
-        Spark.secure(LeService.getConfig().getString("keystore_file"), 
-        		LeService.getConfig().optString("keystore_password"),
-        		/*LeService.getConfig().getString("truststore_file")*/ null,
-        		/*LeService.getConfig().optString("truststore_password")*/ null);
+        Spark.secure(Quick.succOrNull(() -> LeService.getConfig().getString("keystore_file")), 
+        		Quick.succOrNull(() -> LeService.getConfig().getString("keystore_password")),
+        		Quick.succOrNull(() -> LeService.getConfig().getString("truststore_file")),
+        		Quick.succOrNull(() -> LeService.getConfig().getString("truststore_password")));
         Spark.port(port);
 
         Pebble2TemplateEngine pebbleEngine = new Pebble2TemplateEngine();
