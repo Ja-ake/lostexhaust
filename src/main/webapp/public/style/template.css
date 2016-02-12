@@ -161,6 +161,7 @@ h5.residents {
 }
 
 a.residents, a.household, a.contact, a.ph {
+    font-family: "Lato", sans-serif;
 	text-decoration: none;
 	color: #2222FF;
 }
