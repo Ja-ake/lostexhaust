@@ -210,6 +210,7 @@ public class CatlinSql {
 
 	private Connection connect(String host, String user, String pass) throws SQLException {
 		try {
+			// load the jdbc driver
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);

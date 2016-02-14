@@ -103,7 +103,7 @@ public class LeWebserver {
                 
                 int number;
                 try {
-                	number = Math.min(Integer.parseInt(req.queryParams("more")), ContextCache.getHouseholds().size());
+                	number = Math.min(Integer.parseInt(req.queryParams("more")), Math.min(100, ContextCache.getHouseholds().size()-1));
                 } catch (NumberFormatException e) {
                 	number = Math.min(10, ContextCache.getHouseholds().size());
                 }
