@@ -33,7 +33,7 @@
   	  	<h5 class="residents">Residents</h5>
   	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
   	  	  {% if (loop.index < 3) or (carpool.household.residents.size == 4) %}
-  	  	    <a class="residents" href="person.html?p={{ resident.id }}">{{ resident.firstname }} {{ resident.lastname }} {% if resident.gradeLevel is not empty %}(Grade {{ resident.gradeLevel }}){% endif %}</a><br>
+  	  	    <a class="residents" href="person.html?p={{ resident.id }}">{{ resident.firstname }} {{ resident.lastname }}</a> {% if resident.gradeLevel is not empty %}(Grade {{ resident.gradeLevel }}){% endif %}<br>
   	  	  {% else %}
   	  	    and more...
   	  	  {% endif %}
