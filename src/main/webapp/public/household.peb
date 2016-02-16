@@ -3,7 +3,6 @@
   <link rel="stylesheet" type="text/css" href="style/template.css"></link>
 </head>
 <body>
-  <center>
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ nickname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="near.html"><span class="pe">Households near me</span></a></li>
@@ -32,6 +31,5 @@
       </div>
     </div>
   </div>
-  </center>
 </body>
 </html>
