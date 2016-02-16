@@ -3,6 +3,7 @@
   <link rel="stylesheet" type="text/css" href="style/template.css"></link>
 </head>
 <body>
+  <center>
   <div class="portal"><ul class="portal">
     <li class="ph"><span class="ph">Welcome, {{ user.firstname }}.<br><a class="ph" href="/logout">Sign out</a></span></li>
     <li class="pe"><a class="pe" href="javascript:;"><span class="pe peselected">Households near me</span></a></li>
@@ -44,4 +45,5 @@
   	<center><a class="residents" href="/near.html?more={{ max(number + 10, 10) }}">See more</a> | <a class="residents" href="/near.html?more={{ max(number - 10, 10) }}">See less</a></center>
   	</div>
   </div>
+  </center>
 </body>
