@@ -28,7 +28,7 @@
         <b>Contact</b><hr align="left" class="profile">
         {% for contact in user.contactInfo %}
           <span class="profile-info-field"><i>{{ contact.type }}</i></span>
-          <span class="profile-info-entry"><a class="contact" href="javascript:;">{{ contact.value }}</a></span><hr align="left" class="profile">
+          <span class="profile-info-entry">{{ contact.value }}</span><hr align="left" class="profile">
         {% endfor %}
       </div>
       <div class="profile-section">
