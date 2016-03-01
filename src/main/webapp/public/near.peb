@@ -23,6 +23,7 @@
 	</select></span><hr class="near">
 	{% for carpool in sorted %}
   	<div class="household">
+  	  <a name="h{% loop.index %}"></a>
   	  <span class="address"><a class="household" href="household.html?h={{ carpool.household.id }}">{{ carpool.household.address }}</a> (<b>{{ carpool.distance }} mi</b>)</span><br>
   	  <span class="resident-pictures">
   	  	{% for resident in carpool.household.residents | slice(0, min(4, carpool.household.residents.size+0)) %}
@@ -41,7 +42,7 @@
   	  </span>
   	</div><br><hr class="near">
   	{% endfor %}
-  	<center><a class="residents" href="/near.html?more={{ max(number + 10, 10) }}">See more</a> | <a class="residents" href="/near.html?more={{ max(number - 10, 10) }}">See less</a></center>
+  	<center><a class="residents" href="/near.html?more={{ max(number + 10, 10) }}#h{{ max(number, 0) }}">See more</a> | <a class="residents" href="/near.html?more={{ max(number - 10, 10) }}">See less</a></center>
   	</div>
   </div>
 </body>
